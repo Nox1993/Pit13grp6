@@ -1,6 +1,7 @@
 #include "Faktoren.h"
 
 using namespace std; 
+
 /*
   |||||||||| Public |||||||||||||
 */
@@ -27,7 +28,7 @@ void ausgabeFaktoren(){
 }
 
 double getSpannung(){
-	
+	return 0;
 }
 
 bool setSpannung(double spannung){
