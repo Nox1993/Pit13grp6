@@ -65,9 +65,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Faktoren.h" />
+    <ClInclude Include="signalTypen.h" />
+    <ClInclude Include="Signal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Faktoren.cpp" />
+    <ClCompile Include="Signal.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

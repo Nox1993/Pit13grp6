@@ -18,9 +18,18 @@
     <ClCompile Include="Faktoren.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Signal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Faktoren.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Signal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="signalTypen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
