@@ -32,7 +32,7 @@ private:
 	string ziele;
 	int anzahlZiele;
 	//func
-
+	void read();
 };
 
 #endif //signal.h

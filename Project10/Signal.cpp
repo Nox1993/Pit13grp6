@@ -50,4 +50,7 @@ void zielHinzufügen(string gatterName,int pos){
 /*
   |||||||||| Private |||||||||||||
 */
+void read(){
+	//einlesefunktion
+}
 
