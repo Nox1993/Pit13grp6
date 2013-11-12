@@ -6,10 +6,10 @@ using namespace std;
 */
 Signal::Signal(){
 	//missing: enum crap -> set value to "unknown"
-	Signal::quelle = "NULL";
-	Signal::quellenTyp = "Null";
-	Signal::ziele = "NULL";
-	Signal::anzahlZiele = 0;
+	quelle = "NULL";
+	quellenTyp = "Null";
+	ziele = "NULL";
+	anzahlZiele = 0;
 }
 
 Signal::~Signal(){
@@ -50,7 +50,29 @@ void zielHinzufügen(string gatterName,int pos){
 /*
   |||||||||| Private |||||||||||||
 */
-void read(){
-	//einlesefunktion
+vector<string> Signal::read(string path){
+	vector<string> csdLineByLine;
+	ifstream csd( path.c_str() );
+	if(csd){
+		string line;
+		while(!csd.eof()){
+			getline(csd, line); 
+			csdLineByLine.push_back(line);
+		}
+	}
+	return csdLineByLine;
+}
+
+void Signal::outputVector(vector<string> out){
+	if(!out.empty()){
+		int a;
+		int b=0;
+		for(a=0; out.begin()+a != out.end(); a++){
+			string output = out.at(a);
+			cout << output << endl; 
+		}
+
+	}
+	
 }
 

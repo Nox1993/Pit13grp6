@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
@@ -24,6 +25,10 @@ public:
 	void setQuelle(string gatterName);
 	void setQuellentyp(string gatterTyp);
 	void zielHinzufügen(string gatterName, int pos);
+
+	void outputVector(vector<string> out);
+	vector<string> read(string path);
+
 private:
 	//vars
 	//missing: enum stuff
@@ -32,7 +37,8 @@ private:
 	string ziele;
 	int anzahlZiele;
 	//func
-	void read();
+	
+	
 };
 
 #endif //signal.h
