@@ -68,9 +68,6 @@
     <ClCompile Include="LaufzeitAnalysator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="GatterTyp.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>

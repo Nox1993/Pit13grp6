@@ -30,6 +30,7 @@ void Faktoren::getFaktoren(double& spgFaktor, double& tmpFaktor, double& przFakt
 }
 
 bool Faktoren::berechneSpannungFaktor(double spg){
+	return false;
 	// 2-dimensionales Array, beinhaltet Werte der entsprechenden Tabelle
 	//überprüft anhand des Arrays, ob der Wert vom Attribut "Spannung" innerhalb der vorgegebenen Grenzen liegt
 	//false: Fehlermeldung und "false" werden ausgegeben
@@ -38,14 +39,17 @@ bool Faktoren::berechneSpannungFaktor(double spg){
 }
 
 bool Faktoren::berechneTemperaturFaktor(double temp){
-	//siehe "berechneSpannungFaktor", nur mit temperatur statt Spannung
+		return false;
+		//siehe "berechneSpannungFaktor", nur mit temperatur statt Spannung
 }
 
 bool Faktoren::berechneProzessFaktor(short prz){
+		return false;
 	//gleiche Aufgabe wie "berechneSpannungFaktor", mit Prozess statt Spannung, Wert wird nicht berechnet, sondern direkt aus Tabelle extrahiert
 	//Werte, die nicht in der Prozess-Tabelle vorkommen, sind ungültig!
-
-double Faktoren::berechneFaktor (double value, double arr[2], int laenge){
+}
+ double Faktoren::berechneFaktor (double value, double arr[][2], int laenge){
+	//return 0;
 	//durchsucht das übergebene Array nach dem übergebenen Wert. 
 	//Wenn Wert in Array vorhanden ist (1.Tabellenspalte) wird der zugehörige Faktor (2.Tabellenspalte) direkt zurückgegeben
 	//sonst: mit dem am nächsten liegenden Punkten wird eine Interpolation über die entsprechende Methode gestartet und der interpolierte Wert zurückgegeben
@@ -56,29 +60,32 @@ double Faktoren::interpolation (double value, double x1, double x2, double y1, d
 	x1 ,y1 und x2,y2 bestimmen jeweils die Koordinaten der zwei Punkte, zwischen denen interpoliert werden soll
 	Übergabeparameter "value" bestimmt den x-Wert des gesuchten Werts, dabei gilt: x1<wert<x2
 	*/
+	return 0;
 }
 
 inline double Faktoren::getSpannung (){
 	//dient zum Lesen der privaten Spannung
+	return 0;
 }
 
 inline double Faktoren::getTemperatur(){
 	//liest Temperatur
+	return 0;
 }
 
 inline short Faktoren::getProzess(){
-
+	return 0;
 }
 
 inline bool Faktoren::setSpannung (double spannung){
-
+		return false;
 }
 
 inline bool Faktoren::setTemperatur(double temperatur){
-
+		return false;
 }
 
-inline bool Faktoren::setProzesss (short prozess){
-
+inline bool Faktoren::setProzess (short prozess){
+		return false;
 }
 

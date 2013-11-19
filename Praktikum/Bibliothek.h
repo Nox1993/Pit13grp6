@@ -15,11 +15,12 @@ public:
 	~Bibliothek(void);
 	string getPfad();
 	GatterTyp getBibElement(string typ);
-	void dateiAusgabe();
 	void dateiAuswerten();
 	bool pfadEinlesen(string pfad);
-
+	void dateiAusgabe(vector<string> out);
+	void read(string path);
 private:
+	vector<string> bibRaw;
 	vector <GatterTyp*> bibElemente;
 	string datei;
 	void openError();

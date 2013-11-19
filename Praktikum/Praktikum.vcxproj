@@ -94,7 +94,6 @@
     <ClCompile Include="GatterTyp.cpp" />
     <ClCompile Include="GraphErzeuger.cpp" />
     <ClCompile Include="LaufzeitAnalysator.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Menue.cpp" />
     <ClCompile Include="Signal.cpp" />
     <ClCompile Include="SignalListeErzeuger.cpp" />
