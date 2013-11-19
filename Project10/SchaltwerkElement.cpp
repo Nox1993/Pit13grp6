@@ -40,13 +40,13 @@ SchaltwerkElement::getNachfolger(int pos){
     return SchaltwerkElement*;
 }
 int SchaltwerkElement::getAnzahlEingangssignale(){
-    
+    return anzahlNachfolger;
 }
 bool SchaltwerkElement::getIsEingangsElement(){
-    
+    return isEingangsElement;
 }
 bool SchaltwerkElement::getIsAusgangsElement(){
-    
+    return isAusgangsElement;
 }
 void SchaltwerkElement::setname(string n){
     
