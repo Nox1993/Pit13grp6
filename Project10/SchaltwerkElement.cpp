@@ -36,8 +36,8 @@ GatterTyp* SchaltwerkElement::getTyp(){
 double SchaltwerkElement::getLaufzeitEinzelgatter(){
     return laufzeitEinzelgatter;
 }
-SchaltwerkElement::SchaltwerkElement getNachfolger(int pos){
-    
+SchaltwerkElement::getNachfolger(int pos){
+    return 
 }
 int SchaltwerkElement::getAnzahlEingangssignale(){
     
