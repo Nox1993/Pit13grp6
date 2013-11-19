@@ -72,7 +72,7 @@ double berechneFaktor(double value, double arr[][2], int laenge){
 double interpolation(double value, double x1, double x2, double y1, double y2){
 	return 0;
 }
-
+//bla
 
 
 

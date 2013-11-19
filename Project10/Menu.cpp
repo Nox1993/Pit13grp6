@@ -69,3 +69,4 @@ string menu::getPathBib(){
 string menu::getPathCsd(){
 	return csdPath;
 }
+//bla
