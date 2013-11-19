@@ -10,7 +10,7 @@ class menu{
 public:
 	menu();
 	~menu();
-	string getPath();
+	string getPathCsd();
 
 private:
 	string path;

@@ -13,7 +13,7 @@ int main(){
 		menu m; 
 		Signal s;
 	
-		s.outputVector(s.read(m.getPath()));
+		s.outputVector(s.read(m.getPathCsd()));
 		cout << "von vorne?" << endl;
 		cin.sync();
 		cin >> input;

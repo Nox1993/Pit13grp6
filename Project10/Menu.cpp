@@ -10,7 +10,7 @@ menu::~menu(){
 
 }
 
-string menu::getPath(){
+string menu::getPathCsd(){
 	cout << "Bitte einen gueltigen Dateipfad zur csd.txt eingeben: " << endl;
 	cout << "--------------------------------------------------------" << endl;
 	cin.sync();
