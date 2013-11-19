@@ -22,8 +22,8 @@ public:
   SchaltwerkElement* schaltwerkElement;
   ListenElement* next;
 
-  inline SchaltwerkElement* getSchaltwerkElement();
-  inline ListenElement* getNextElement();
+  void SchaltwerkElement* getSchaltwerkElement();
+  void ListenElement* getNextElement();
 /*Diese Methoden dienen zum Lesen der privaten Attribute eines einzelnen Objekts vom Typ
 ListenElement. Diese Methoden können auch inline implementiert werden*/
   void setSchaltwerkElement( SchaltwerkElement* schaltwerkEl );
