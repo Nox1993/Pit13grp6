@@ -11,8 +11,10 @@ public:
 	menu();
 	~menu();
 	string getPathCsd();
+	string getPathBib();
 
 private:
+	bool abfrage(char userInput);
 	string path;
 
 };
