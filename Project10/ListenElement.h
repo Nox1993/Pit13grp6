@@ -5,6 +5,7 @@
 #include "ListenElement.h"
 #include "GraphenErzeuger.h"
 #include "LaufzeitAnalysator.h"
+#include "SchaltwerkElement.h"
 #include <string>
 #include <iostream>
 #include <fstream>
