@@ -16,10 +16,8 @@ SchaltwerkElement::SchaltwerkElement(GatterTyp* gTyp){
     isEingangsElement = false;
     isAusgangsElement = false;
     anzahlEingangssignale = NULL;
-    
 }
 ~SchaltwerkElement::SchaltwerkElement(){
-
 }
 
 SchaltwerkElement::getLaufzeitEinzelgatter(){
