@@ -47,13 +47,13 @@ bool SchaltwerkElement::getIsAusgangsElement(){
     return isAusgangsElement;
 }
 void SchaltwerkElement::setname(string n){
-    
+    name = n;
 }
 void SchaltwerkElement::nachfolgerHinzufuegen(SchaltwerkElement schaltwerkElement, int pos){
     
 }
 void SchaltwerkElement::setAnzahlNachfolger(int Anzahl){
-    
+    SchaltwerkElement->anzahlNachfolger = Anzahl;
 }
 void SchaltwerkElement::setAnzahlEingangssignale(short anzahl){
     
