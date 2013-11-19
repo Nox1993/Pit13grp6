@@ -37,7 +37,7 @@ double SchaltwerkElement::getLaufzeitEinzelgatter(){
     return laufzeitEinzelgatter;
 }
 SchaltwerkElement::getNachfolger(int pos){
-    return 
+    return SchaltwerkElement*;
 }
 int SchaltwerkElement::getAnzahlEingangssignale(){
     
