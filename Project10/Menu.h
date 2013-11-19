@@ -17,9 +17,8 @@ private:
 	string bibPath;
 	string csdPath;
 	bool abfrage(char userInput);
-	void pathCsd();
-	void pathBib();
-
+	void path(char no);
+	string pathRoutine(string a);
 };
 
 #endif //MENU_H

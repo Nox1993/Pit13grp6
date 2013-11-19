@@ -32,30 +32,23 @@ bool menu::abfrage(char userInput){
 }
 
 
-void menu::pathBib(){
-	char input;
-	string path;
-	do{
-	cout << "Bitte einen gueltigen Dateipfad zur bib.txt eingeben: " << endl;
-	cout << "--------------------------------------------------------" << endl;
-	cin.sync();
-	cin >> path;
-	cout << "Testausgabe pfad:"<< endl << "Stimmt das? [j/n]" << endl;
-	cin.sync();
-	cin >> input;
-	}while(!menu::abfrage(input));
-	cout << "Weiter mit beliebiger Taste!" << endl;
-	cin.sync();
-	cin.get();
-
-	bibPath = path; 
+void menu::path(char no){
+	
+	switch (no){
+	case '2':
+		csdPath = menu::pathRoutine("csd");
+	case '3':
+		bibPath = menu::pathRoutine("bib");
+	default:
+		return;
+	}
 }
 
-void menu::pathCsd(){
+string menu::pathRoutine(string a){
 	char input;
 	string path;
 	do{
-	cout << "Bitte einen gueltigen Dateipfad zur csd.txt eingeben: " << endl;
+	cout << "Bitte einen gueltigen Dateipfad zur " << a << ".txt eingeben: " << endl;
 	cout << "--------------------------------------------------------" << endl;
 	cin.sync();
 	cin >> path;
@@ -66,6 +59,13 @@ void menu::pathCsd(){
 	cout << "Weiter mit beliebiger Taste!" << endl;
 	cin.sync();
 	cin.get();
+	return path;
+}
 
-	csdPath = path; 
+string menu::getPathBib(){
+	return bibPath;
+}
+
+string menu::getPathCsd(){
+	return csdPath;
 }
