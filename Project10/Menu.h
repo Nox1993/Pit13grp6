@@ -14,8 +14,11 @@ public:
 	string getPathBib();
 
 private:
+	string bibPath;
+	string csdPath;
 	bool abfrage(char userInput);
-	string path;
+	void pathCsd();
+	void pathBib();
 
 };
 

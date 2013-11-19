@@ -28,11 +28,13 @@ bool menu::abfrage(char userInput){
 	case 'n': 
 		return false;
 	}
+	return false;
 }
 
 
-string menu::getPathBib(){
-	char input; 
+void menu::pathBib(){
+	char input;
+	string path;
 	do{
 	cout << "Bitte einen gueltigen Dateipfad zur bib.txt eingeben: " << endl;
 	cout << "--------------------------------------------------------" << endl;
@@ -46,17 +48,18 @@ string menu::getPathBib(){
 	cin.sync();
 	cin.get();
 
-	return path; 
+	bibPath = path; 
 }
 
-string menu::getPathCsd(){
-	char input; 
+void menu::pathCsd(){
+	char input;
+	string path;
 	do{
 	cout << "Bitte einen gueltigen Dateipfad zur csd.txt eingeben: " << endl;
 	cout << "--------------------------------------------------------" << endl;
 	cin.sync();
 	cin >> path;
-	cout << "Testausgabe pfad:"<< endl << "Stimmt das? [j/n]" << endl;
+	cout << "Testausgabe pfad:"<< path << endl << "Stimmt das? [j/n]" << endl;
 	cin.sync();
 	cin >> input;
 	}while(!menu::abfrage(input));
@@ -64,5 +67,5 @@ string menu::getPathCsd(){
 	cin.sync();
 	cin.get();
 
-	return path; 
+	csdPath = path; 
 }

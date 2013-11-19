@@ -8,14 +8,6 @@ using namespace std;
 int main(){
 	char input;
 	do{	
-		cout << "-entry" << endl;
-		cout << endl;
-		menu m; 
-		Signal s;
-		m.getPathBib();
-		s.outputVector(s.read(m.getPathCsd()));
-		cout << "von vorne?" << endl;
-		cin.sync();
-		cin >> input;
+		return 0;
 	}while(input != '0');
 }
