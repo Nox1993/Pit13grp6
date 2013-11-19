@@ -25,10 +25,6 @@ SchaltwerkElement::SchaltwerkElement( GatterTyp* gTyp ){
 SchaltwerkElement::~SchaltwerkElement(){
 }
 
-double SchaltwerkElement::getLaufzeitEinzelgatter(){
-    return laufzeitEinzelgatter;
-}
-
 string SchaltwerkElement::getName(){
     return name;
 }
@@ -40,7 +36,7 @@ double SchaltwerkElement::getLaufzeitEinzelgatter(){
     return laufzeitEinzelgatter;
 }
 SchaltwerkElement* SchaltwerkElement::getNachfolger(int pos){
-    return SchaltwerkElement*;
+    return nachfolgerElemente[pos];
 }
 int SchaltwerkElement::getAnzahlEingangssignale(){
     return anzahlNachfolger;
