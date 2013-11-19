@@ -9,21 +9,23 @@
 #include "SchaltwerkElement.h"
 
 SchaltwerkElement::SchaltwerkElement( GatterTyp* gTyp ){
-//alle Attribute aus NULL für Zeiger initialisieren
+    //alle Attribute aus NULL für Zeiger initialisieren
     name = "";
-//Ausserdem bekommt der Konstruktor einen Zeiger auf ein Element der Bibliotheksdatenbank und speichert es in das Attribut typ.
+    //Ausserdem bekommt der Konstruktor einen Zeiger auf ein Element der Bibliotheksdatenbank und speichert es in das Attribut typ.
     Bibliothek::bibElemente->typ;
     laufzeitEinzelgatter = 0;
-    nachfolgerElemente = NULL;
+    for (int a=0; a<5; a++) {
+        nachfolgerElemente[a] = NULL;
+    }
     anzahlNachfolger = 0;
     isEingangsElement = false;
     isAusgangsElement = false;
     anzahlEingangssignale = NULL;
 }
-~SchaltwerkElement::SchaltwerkElement(){
+SchaltwerkElement::~SchaltwerkElement(){
 }
 
-SchaltwerkElement::getLaufzeitEinzelgatter(){
+double SchaltwerkElement::getLaufzeitEinzelgatter(){
     return laufzeitEinzelgatter;
 }
 
@@ -37,7 +39,7 @@ GatterTyp* SchaltwerkElement::getTyp(){
 double SchaltwerkElement::getLaufzeitEinzelgatter(){
     return laufzeitEinzelgatter;
 }
-SchaltwerkElement::getNachfolger(int pos){
+SchaltwerkElement* SchaltwerkElement::getNachfolger(int pos){
     return SchaltwerkElement*;
 }
 int SchaltwerkElement::getAnzahlEingangssignale(){
@@ -53,7 +55,9 @@ void SchaltwerkElement::setname(string n){
     name = n;
 }
 void SchaltwerkElement::nachfolgerHinzufuegen(SchaltwerkElement* schaltwerkElement, int pos){
-    nachfolgerElemente[pos] = SchaltwerkElement;
+    
+    if(!(pos>=0 && pos<5))return;
+    else{nachfolgerElemente[pos] = schaltwerkElement;}
 }
 void SchaltwerkElement::setAnzahlNachfolger(int Anzahl){
     anzahlNachfolger = Anzahl;
