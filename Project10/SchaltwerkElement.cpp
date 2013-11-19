@@ -7,15 +7,15 @@ SchaltwerkElement::SchaltwerkElement( GatterTyp* gTyp ){
 
 SchaltwerkElement::SchaltwerkElement(GatterTyp* gTyp){
     //alle Attribute aus NULL für Zeiger initialisieren
-    name = null;
+    name = NULL;
     //Ausserdem bekommt der Konstruktor einen Zeiger auf ein Element der Bibliotheksdatenbank und speichert es in das Attribut typ.
     Bibliothek::bibElemente->typ;
     laufzeitEinzelgatter = 0;
-    nachfolgerElemente = null;
+    nachfolgerElemente = NULL;
     anzahlNachfolger = 0;
-    isEingangsElement = null;
-    isAusgangsElement = null;
-    anzahlEingangssignale = null;
+    isEingangsElement = false;
+    isAusgangsElement = false;
+    anzahlEingangssignale = NULL;
     
 }
 ~SchaltwerkElement::SchaltwerkElement(){
