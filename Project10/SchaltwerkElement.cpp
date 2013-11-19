@@ -30,11 +30,11 @@ string SchaltwerkElement::getName(){
     return name;
 }
 
-void SchaltwerkElement::getTyp(){
-    
+GatterTyp* SchaltwerkElement::getTyp(){
+    return GatterTyp;
 }
 double SchaltwerkElement::getLaufzeitEinzelgatter(){
-    
+    return laufzeitEinzelgatter;
 }
 SchaltwerkElement::SchaltwerkElement getNachfolger(int pos){
     
