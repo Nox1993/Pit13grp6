@@ -2,6 +2,7 @@
 #define SCHALTWERKELEMENT_H
 #endif
 
+#include "ListenElement.h"
 #include "Gattertyp.h"
 using namespace std;
 #include <string>
