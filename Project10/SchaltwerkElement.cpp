@@ -41,7 +41,7 @@ bool SchaltwerkElement::getIsEingangsElement(){
 bool SchaltwerkElement::getIsAusgangsElement(){
     return isAusgangsElement;
 }
-void SchaltwerkElement::setname(string n){
+void SchaltwerkElement::setname( string n ){
     name = n;
 }
 void SchaltwerkElement::nachfolgerHinzufuegen(SchaltwerkElement schaltwerkElement, int pos){
