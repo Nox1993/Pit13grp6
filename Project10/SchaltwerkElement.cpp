@@ -11,7 +11,7 @@ SchaltwerkElement::SchaltwerkElement(GatterTyp* gTyp){
     //Ausserdem bekommt der Konstruktor einen Zeiger auf ein Element der Bibliotheksdatenbank und speichert es in das Attribut typ.
     Bibliothek::bibElemente->typ;
     laufzeitEinzelgatter = 0;
-    nachfolgerElemente = NULL;
+    nachfolgerElemente = NULL; //array vector/stat/list
     anzahlNachfolger = 0;
     isEingangsElement = false;
     isAusgangsElement = false;
@@ -26,8 +26,8 @@ SchaltwerkElement::getLaufzeitEinzelgatter(){
     return laufzeitEinzelgatter;
 }
 
-void SchaltwerkElement::getName(){
-    
+string SchaltwerkElement::getName(){
+    return name;
 }
 
 void SchaltwerkElement::getTyp(){
