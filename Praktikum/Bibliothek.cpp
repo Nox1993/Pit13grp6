@@ -61,10 +61,7 @@ void Bibliothek::dateiAusgabe(vector<string> out){
 			cout<< noLine <<". "<< output << endl;
 		}
 	}
-
-
 	//Fallunterscheidung, Fehlermeldung, wenn Datei nicht gefunden oder nicht geöffnet werden kann
-
 }
 
 void Bibliothek::read (string path){
@@ -82,6 +79,17 @@ void Bibliothek::read (string path){
 
 
 void Bibliothek::dateiAuswerten(){
+	ifstream in (datei.c_str()); //Datei öffnen
+	if (in) { //Datei kann geöffnet werden?
+		string zeile;
+		while(!in.eof()){ //Sind noch Daten da?
+			getline (in,zeile); //Zeilenweises Einlesen
+			size_t find
+			
+		}
+
+	}
+
 
 	/*liest Datei und wertet sie aus. Dabei soll jeder in der Datei beschriebene Gattertyp in einem Element 
 	vom Typ Gattertyp im Vektor bibElemente gespeichert werden. Die Reihenfolge ist dabei nicht wichtig. Das 
@@ -92,5 +100,12 @@ void Bibliothek::dateiAuswerten(){
 
 }
 
-//Gattertyp* Bibliothek::getBibelement (string typ)
+GatterTyp* Bibliothek::getBibElement (string typ){
+	GatterTyp::getLastFaktor;
+	 return GatterTyp::&lastFaktor;
+	 /*dieser Methode wird ein String, des Gattertyps übergeben (z.B. inv1a).
+	 Sie gibt einen Zeiger auf das entsprechende Element vom Typ Gattertyp zurück.
+	 */
+}
+
 
