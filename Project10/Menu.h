@@ -12,12 +12,14 @@ public:
 	~menu();
 	string getPathCsd();
 	string getPathBib();
+	void query();
 
 private:
 	string bibPath;
 	string csdPath;
-	bool abfrage(char userInput);
+	bool retype(char userInput);
 	void path(char no);
+	char queryAn(char in);
 	string pathRoutine(string a);
 };
 

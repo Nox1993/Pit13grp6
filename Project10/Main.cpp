@@ -1,14 +1,24 @@
 #include "Menu.h"
 #include "signalTypen.h"
-#include "Signal.h"
+#include "signal.h"
 #include "Faktoren.h"
 
 using namespace std; 
 
 int main(){
-	char input;
+	char input; 
+	menu m;
+	signal s;
 	do{	
-		return 0;
-	}while(input != '0');
+	m.query();
+	s.read(m.getPathCsd());
+
+	cout << endl << "Datei Eingelesen." << endl << endl;
+
+	s.outputVector(s.getCsdLineByLine());
+	cout << "Nochmal ausfuehren? [j/n]"; 
+	cin.sync();
+	cin >> input; 
+	}while(input !='n');
 }
 //bla

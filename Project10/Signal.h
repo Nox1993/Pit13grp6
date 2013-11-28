@@ -9,33 +9,36 @@
 
 using namespace std;
 
-class Signal{	
+class signal{	
 public:
 	//func
 		
-	Signal();
-	~Signal();
+	signal();
+	~signal();
 	int getAnzahlZiele();
-	//get enum crap
 	string getQuelle();
 	string getQuellenTyp();
 	string getZiel(int pos);
+	vector<string> getCsdLineByLine();
+	signalTypen getSignalTyp();
 	void setAnzahlZiele(int nZiele);
-	//set enum crap
+	void setSignalTyp(signalTypen sigTyp);
 	void setQuelle(string gatterName);
 	void setQuellentyp(string gatterTyp);
 	void zielHinzufügen(string gatterName, int pos);
-
 	void outputVector(vector<string> out);
+	void analyzeCsd(vector<string> csd);
 	vector<string> read(string path);
+
 
 private:
 	//vars
-	//missing: enum stuff
+	signalTypen signalTyp; 
 	string quelle;
 	string quellenTyp;
-	string ziele;
+	string ziele[5];
 	int anzahlZiele;
+	vector<string> csdLineByLine;
 	//func
 	
 	
