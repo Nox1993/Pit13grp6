@@ -10,29 +10,29 @@ using namespace std;
 #include <fstream>
 
 class SchaltwerkElement{
-
+    
 private:
     string name;
     Gattertyp* typ;
     double laufzeitEinzelgatter;
-    SchaltwerkElement[]* nachfolgerElemente;
+    SchaltwerkElement* nachfolgerElemente[5];
     int anzahlNachfolger;
     bool isEingangsElement;
     bool isAusgangsElement;
     short anzahlEingangssignale;
-
+    
 public:
     SchaltwerkElement(GatterTyp* gTyp);
     ~SchaltwerkElement();
-    void getName();
+    string getName();
     void getTyp();
     double getLaufzeitEinzelgatter();
-    SchaltwerkElement getNachfolger(int pos);
+    SchaltwerkElement* getNachfolger(int pos);
     int getAnzahlEingangssignale();
     bool getIsEingangsElement();
     bool getIsAusgangsElement();
     void setname(string n);
-    void nachfolgerHinzufuegen(SchaltwerkElement schaltwerkElement, int pos);
+    void nachfolgerHinzufuegen(SchaltwerkElement* schaltwerkElement, int pos);
     void setAnzahlNachfolger(int Anzahl);
     void setAnzahlEingangssignale(short anzahl);
     void setEingangsElement(bool isEingangsEl);
