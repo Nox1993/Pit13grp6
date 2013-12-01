@@ -12,7 +12,6 @@ using namespace std;
 class signal{	
 public:
 	//func
-		
 	signal();
 	~signal();
 	int getAnzahlZiele();
@@ -40,9 +39,18 @@ private:
 	int anzahlZiele;
 	vector<string> csdLineByLine;
 	//func
+	string deleteSpaces(string input);
 	
 	
 };
 
-#endif //signal.h
-//bla
+#endif //SIGNAL_H
+/*
+Project PIT2013grp6
+Name:	Signal.h
+Ver.:	---
+
+Author: Jan Kost
+		Student ETIT @ KIT
+Matnr.: 1714630
+*/

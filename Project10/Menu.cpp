@@ -2,6 +2,8 @@
 
 using namespace std;
 
+//Konstruktor & Destruktor der Klasse Menu:
+
 menu::menu(){
 	string path = "NULL";
 }
@@ -10,6 +12,21 @@ menu::~menu(){
 
 }
 
+//Accessoren/Mutatoren: 
+
+string menu::getPathBib(){
+	return bibPath;
+}
+
+string menu::getPathCsd(){
+	return csdPath;
+}
+
+//------------------------------------------------------------------------------------
+//Methoden:
+//------------------------------------------------------------------------------------
+
+//Abfrage Benutzer/ das eigentliche Menu
 void menu::query(){
 	char input;
 	char a;
@@ -33,6 +50,7 @@ void menu::query(){
 	}
 }
 
+//Überprüfung der Benutzereigabe, ggf. Korrektur, dann Rückgabe. 
 char menu::queryAn(char in){
 	char newIn;
 	char ok;
@@ -52,6 +70,7 @@ char menu::queryAn(char in){
 	}
 }
 
+//Aufruf von pathRoutine abhängig von der Benutzereingabe in "query".
 void menu::path(char no){
 	
 	switch (no){
@@ -66,6 +85,7 @@ void menu::path(char no){
 	}
 }
 
+//Fragt den jeweiligen Dateipfad vom Benutzer ab.
 string menu::pathRoutine(string a){
 	char input;
 	string path;
@@ -84,6 +104,7 @@ string menu::pathRoutine(string a){
 	return path;
 }
 
+//Hilfsfunktion für "pathRoutine". Erlaubt Korrektur von Fehleingaben. 
 bool menu::retype(char userInput){
 	char newInput;
 	char ok;
@@ -106,12 +127,12 @@ bool menu::retype(char userInput){
 	}
 	return false;
 }
+/*
+Project PIT2013grp6
+Name:	Menu.cpp
+Ver.:	---
 
-string menu::getPathBib(){
-	return bibPath;
-}
-
-string menu::getPathCsd(){
-	return csdPath;
-}
-//bla
+Author: Jan Kost
+		Student ETIT @ KIT
+Matnr.: 1714630
+*/

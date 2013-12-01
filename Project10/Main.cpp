@@ -6,19 +6,27 @@
 using namespace std; 
 
 int main(){
-	char input; 
+	char input;	
+	do{	
 	menu m;
 	signal s;
-	do{	
 	m.query();
 	s.read(m.getPathCsd());
 
 	cout << endl << "Datei Eingelesen." << endl << endl;
 
-	s.outputVector(s.getCsdLineByLine());
+	s.analyzeCsd(s.getCsdLineByLine());
 	cout << "Nochmal ausfuehren? [j/n]"; 
 	cin.sync();
 	cin >> input; 
 	}while(input !='n');
 }
-//bla
+/*
+Project PIT2013grp6
+Name:	Menu.cpp
+Ver.:	---
+
+Author: Jan Kost
+		Student ETIT @ KIT
+Matnr.: 1714630
+*/

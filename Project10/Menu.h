@@ -8,6 +8,7 @@ using namespace std;
 
 class menu{
 public:
+	//func
 	menu();
 	~menu();
 	string getPathCsd();
@@ -15,8 +16,10 @@ public:
 	void query();
 
 private:
+	//vars
 	string bibPath;
 	string csdPath;
+	//func
 	bool retype(char userInput);
 	void path(char no);
 	char queryAn(char in);
@@ -24,4 +27,12 @@ private:
 };
 
 #endif //MENU_H
-//bla
+/*
+Project PIT2013grp6
+Name:	Menu.cpp
+Ver.:	---
+
+Author: Jan Kost
+		Student ETIT @ KIT
+Matnr.: 1714630
+*/

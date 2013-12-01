@@ -1,9 +1,9 @@
 #include "signal.h"
 
 using namespace std; 
-/*
-  |||||||||| Public |||||||||||||
-*/
+
+//Konstruktor & Destruktor der Klasse Signal:
+
 signal::signal(){
 	signalTyp = unbekannt;
 	quelle = "NULL";
@@ -17,6 +17,8 @@ signal::signal(){
 signal::~signal(){
 
 }
+
+//Accessoren/Mutatoren der Klasse Signal:
 
 int signal::getAnzahlZiele(){
 	return anzahlZiele;
@@ -63,14 +65,16 @@ void signal::zielHinzufügen(string gatterName,int pos){
 		ziele[pos] = gatterName;
 	}
 	else {
-		cout << "Err. @ func. singnal::zielHinzufügen: Pos. out of Array boundaries."
+		cout << "Err. @ func. singnal::zielHinzufügen: Pos. out of Array boundaries.";
 	}
 
 		
 }
-/*
-  |||||||||| Private |||||||||||||
-*/
+//------------------------------------------------------------------------------------
+//Methoden:
+//------------------------------------------------------------------------------------
+
+//Zeilenweises einlesen & zwischenspeichern der csd.exe
 vector<string> signal::read(string path){
 	ifstream csd( path.c_str() );
 	if(csd){
@@ -83,6 +87,7 @@ vector<string> signal::read(string path){
 	return csdLineByLine;
 }
 
+//Ausgabe der in einem Vektor abgespeicherten csd.txt (Zeilen durchnummeriert)  
 void signal::outputVector(vector<string> out){
 	if(!out.empty()){
 		int lineNo2 = 1;
@@ -103,20 +108,42 @@ void signal::outputVector(vector<string> out){
 	}
 }
 
+//Hilfsfunktion, löscht Leerzeichen in einem ihr übergebenen String. 
+string signal::deleteSpaces(string input){
+	string::iterator elimSpaces = input.begin();
+		while(elimSpaces != input.end()){
+		if(*elimSpaces == ' '){
+			string::iterator deleteThis = elimSpaces;
+			elimSpaces++;
+			input.erase(deleteThis);
+		}
+		else {
+			elimSpaces++;
+		}
+
+	}
+	return input;
+}	
+
+//Stringbehandlung csd.txt
 void signal::analyzeCsd(vector<string> csd){
 	vector<string> input = csd;
 	if(!input.empty()){
-		
 		for(int a = 0; input.begin()+a != input.end(); a++){
 			string line = input.at(a);
-			
+			cout << signal::deleteSpaces(line) << endl;
 		}
-
-		
 	}
 	else{
 		cout << "Err. @ func. signal::analyzeCsd: Leerer Vektor. Schaltnetzdatei und Pfad ueberpruefen." << endl << endl;
 	}
 }
+/*
+Project PIT2013grp6
+Name:	Menu.cpp
+Ver.:	---
 
-//bla
+Author: Jan Kost
+		Student ETIT @ KIT
+Matnr.: 1714630
+*/
