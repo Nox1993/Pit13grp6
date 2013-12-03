@@ -88,7 +88,7 @@ void sigLiErz::discriminate(vector<string> csd){
 		for(int a = 0; input.begin()+a != input.end(); a++){		//Äussere Schleife. Iteriert duch Vektor. 
 			string line = input.at(a);						
 			string lineNoSpaces = sigLiErz::deleteSpaces(line);
-			cout << lineNoSpaces << endl;
+			cout << "interesting part" << endl;
 			if(lineNoSpaces.find("END") == string::npos){		//Innere Schleife. Läuft nur bis END-Zeile erreicht. 
 				if(!lineNoSpaces.empty()){							//Läuft nicht überflüssigerweise in Leerzeilen.
 						if(lineNoSpaces.find("ENTITY") != string::npos){	
@@ -118,15 +118,12 @@ void sigLiErz::discriminate(vector<string> csd){
 							
 						}				
 						
-				}
-				else {
-					continue;
-				}
-			}
+				}//if (empty)
+			} //if (!end)
 			else {
 				continue;
 			}
-		}
+		} //for loop
 	}
 	else{
 		cout << "Err. @ func. sigLiErz::analyzeCsd: Leerer Vektor. Schaltnetzdatei und Pfad ueberpruefen." << endl << endl;
@@ -134,7 +131,7 @@ void sigLiErz::discriminate(vector<string> csd){
 }
 
 /*Erzeugt zu jedem der in den Zeilen "INPUT" bis "CLOCK" der csd.txt enthaltenen Signalnamen
-eine neue Instanz der Klasse Signal.*/ 
+eine neue Instanz der Klasse Signal. ---erweitert "discriminate"---*/ 
 void sigLiErz::grabSignals(char type,string currentLine){
 	switch(type){
 	case '1': //Inputzeile
@@ -177,23 +174,28 @@ void sigLiErz::grabSignals(char type,string currentLine){
 			size_t posS = currentLine.find('c');
 			currentLine.erase(posS, 4);
 			stack<int> no;
-			for(string::iterator digits = currentLine.begin(); digits != currentLine.end(); digits++){
+				for(string::iterator digits = currentLine.begin(); digits != currentLine.end(); digits++){
 				char a = *digits; 
+				int d = 0;
 				if(a != '0' || a != '1' || a != '2' || a != '3' || a != '4' || a != '5' || a != '6' ||a != '7' || a != '8' || a != '9'){
 					continue;
 				}
 				else {
-
+					d = a - '0';
 				}
-
-				
+				no.push(d);
 			}
-			long double frequency = 0;
+			while(!no.empty()){	
+				int n = no.top();
+				cout << n << endl;
+				no.pop();
+			}
+			/*long double frequency = 0;
 			signal newSignal;
 			newSignal.setName("clk"); 
 			newSignal.setSignalTyp(takt);
 			newSignal.setFreq(frequency);
-			//newSignal push_back?
+			//newSignal push_back?*/
 		}
 	default:
 		cout << "Err. @ func. sigLiErz::grabSignals(): Fehlfunktion auf switch-ebene. Übergebene case-parameter prüfen." << endl << endl;
