@@ -15,20 +15,19 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 
-class ListenElement{
+class ListenElement : public SchaltwerkElement{
     private:
     ListenElement();
     ~ListenElement();
     
+    SchaltwerkElement* schaltwerkElement;
+    ListenElement* next;
+
     public:
-    SchaltwerkElement::SchaltwerkElement* getSchaltwerkElement();
+    SchaltwerkElement* getSchaltwerkElement();
     ListenElement* getNextElement();
-/*Diese Methoden dienen zum Lesen der privaten Attribute eines einzelnen Objekts vom Typ
-     ListenElement. Diese Methoden können auch inline implementiert werden*/
-    void setSchaltwerkElement(SchaltwerkElement* schaltwerkEl);
-    void setNextElement(ListenElement nextEl);
-/*Diese Methoden dienen zum Schreiben der privaten Attribute eines einzelnen Objekts vom Typ
-     ListenElement. Diese Methoden koennen auch inline implementiert werden.*/
+    void setSchaltwerkElement(SchaltwerkElement::SchaltwerkElement* schaltwerkEl);
+    void setNextElement(ListenElement* nextEl);
 };
 
 #endif
