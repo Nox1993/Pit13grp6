@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -16,11 +17,11 @@ public:
 	sigLiErz();
 	~sigLiErz();
 	void outputVector(vector<string> out);
-	void analyzeCsd(vector<string> csd);
+	void discriminate(vector<string> csd);
 	vector<string> read();
 	vector<string> getCsdLineByLine();
 	void setDatei(string pathCsd);
-
+	
 private:
 	//vars
 	signal signale;
@@ -29,9 +30,8 @@ private:
 	long frequenz;
 	vector<string> csdLineByLine;
 	//func
+	void grabSignals(char type, string currentLine);
 	string deleteSpaces(string input);
-	
-	
 };
 
 #endif //SIGNALLISTEERZEUGER_H

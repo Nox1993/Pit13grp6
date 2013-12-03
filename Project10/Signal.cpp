@@ -12,6 +12,8 @@ signal::signal(){
 		ziele[a] = "NULL";
 	}
 	anzahlZiele = 0;
+	name = "N/A";
+	freq = 0;
 }
 
 signal::~signal(){
@@ -22,6 +24,10 @@ signal::~signal(){
 
 string signal::getName(){
 	return name;
+}
+
+long double signal::getFreq(){
+	return freq;
 }
 
 int signal::getAnzahlZiele(){
@@ -48,6 +54,9 @@ void signal::setName(string sigName){
 	name = sigName;
 }
 
+void signal::setFreq(long double frequency){
+	freq = frequency;
+}
 
 void signal::setAnzahlZiele(int nZiele){
 	anzahlZiele = nZiele;

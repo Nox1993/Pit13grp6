@@ -16,11 +16,13 @@ public:
 	~signal();
 	int getAnzahlZiele();
 	string getName();
+	long double getFreq();
 	string getQuelle();
 	string getQuellenTyp();
 	string getZiel(int pos);
 	signalTypen getSignalTyp();
 	void setName(string sigName);
+	void setFreq(long double frequency);
 	void setAnzahlZiele(int nZiele);
 	void setSignalTyp(signalTypen sigTyp);
 	void setQuelle(string gatterName);
@@ -36,6 +38,8 @@ private:
 	string quellenTyp;
 	string ziele[5];
 	int anzahlZiele;
+	long double freq;
+
 	//func
 
 	
