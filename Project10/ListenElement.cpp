@@ -13,21 +13,21 @@ ListenElement::ListenElement(){
     next = NULL;
     //ALLE ZEIGER_ATTRIBUTE MIT NULL INITIALISIEREN
 }
-~ListenELement::ListenElement(){
+ListenElement::~ListenElement(){
 }
 
-ListenElement::SchaltwerkElement* getSchaltwerkElement(){
+SchaltwerkElement* ListenElement::getSchaltwerkElement(){
     return schaltwerkElement;
 }
 
-ListenElement::ListenElement* getNextElement(){
+ListenElement* ListenElement::getNextElement(){
     return next;
 }
 
-ListenElement::void setSchaltwerkElement(){
-    
+void ListenElement::setSchaltwerkElement(SchaltwerkElement::SchaltwerkElement* schaltwerkEl){
+    schaltwerkElement = schaltwerkEl;
 }
 
-ListenElement::void setNextElement(){
-    
+void ListenElement::setNextElement(ListenElement* nextEl){
+    next = nextEl;
 }

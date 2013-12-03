@@ -7,10 +7,11 @@
 //
 
 #include "SchaltwerkElement.h"
-
+using namespace std;
+#include <iostream>
 SchaltwerkElement::SchaltwerkElement( GatterTyp* gTyp ){
     //alle Attribute aus NULL für Zeiger initialisieren
-    name = "";
+    name = " ";
     //Ausserdem bekommt der Konstruktor einen Zeiger auf ein Element der Bibliotheksdatenbank und speichert es in das Attribut typ.
     Bibliothek::bibElemente->typ;
     laufzeitEinzelgatter = 0;
