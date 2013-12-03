@@ -15,31 +15,29 @@ public:
 	signal();
 	~signal();
 	int getAnzahlZiele();
+	string getName();
 	string getQuelle();
 	string getQuellenTyp();
 	string getZiel(int pos);
-	vector<string> getCsdLineByLine();
 	signalTypen getSignalTyp();
+	void setName(string sigName);
 	void setAnzahlZiele(int nZiele);
 	void setSignalTyp(signalTypen sigTyp);
 	void setQuelle(string gatterName);
 	void setQuellentyp(string gatterTyp);
 	void zielHinzufügen(string gatterName, int pos);
-	void outputVector(vector<string> out);
-	void analyzeCsd(vector<string> csd);
-	vector<string> read(string path);
 
 
 private:
 	//vars
+	string name;
 	signalTypen signalTyp; 
 	string quelle;
 	string quellenTyp;
 	string ziele[5];
 	int anzahlZiele;
-	vector<string> csdLineByLine;
 	//func
-	string deleteSpaces(string input);
+
 	
 	
 };

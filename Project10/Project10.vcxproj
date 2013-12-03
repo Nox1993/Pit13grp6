@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="signalListeErzeuger.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="signalTypen.h" />
     <ClInclude Include="Signal.h" />
@@ -72,6 +73,7 @@
     <ClCompile Include="Signal.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="signalListeErzeuger.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

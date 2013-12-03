@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include "signalTypen.h"
 #include "signal.h"
+#include "signalListeErzeuger.h"
 #include "Faktoren.h"
 
 using namespace std; 
@@ -9,9 +10,10 @@ int main(){
 	char input;	
 	do{	
 	menu m;
-	signal s;
+	sigLiErz s;
 	m.query();
-	s.read(m.getPathCsd());
+	s.setDatei(m.getPathCsd());
+	s.read();
 
 	cout << endl << "Datei Eingelesen." << endl << endl;
 
