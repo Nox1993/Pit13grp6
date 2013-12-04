@@ -8,6 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <stack>
+#include <math.h>
 
 using namespace std;
 

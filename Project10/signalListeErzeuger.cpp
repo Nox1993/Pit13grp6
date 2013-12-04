@@ -81,8 +81,6 @@ string sigLiErz::deleteSpaces(string input){
 //Stringbehandlung csd.txt
 void sigLiErz::discriminate(vector<string> csd){
 	vector<string> input = csd;										//Kopie des übergebene Vektors erstellen. 
-	bool entity = false;
-	bool begin = false;
 	char dataSetNo = ' '; 
 	if(!input.empty()){ 
 		for(int a = 0; input.begin()+a != input.end(); a++){		//Äussere Schleife. Iteriert duch Vektor. 
@@ -91,33 +89,25 @@ void sigLiErz::discriminate(vector<string> csd){
 			cout << "interesting part" << endl;
 			if(lineNoSpaces.find("END") == string::npos){		//Innere Schleife. Läuft nur bis END-Zeile erreicht. 
 				if(!lineNoSpaces.empty()){							//Läuft nicht überflüssigerweise in Leerzeilen.
-						if(lineNoSpaces.find("ENTITY") != string::npos){	
-							entity = true;
-						}
-						else if(entity == true && lineNoSpaces.find("INPUT") != string::npos){
-							dataSetNo = '1';
-							sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
-							
+							if(lineNoSpaces.find("INPUT") != string::npos){
+								dataSetNo = '1';
+								sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
+							}
+							if(lineNoSpaces.find("OUTPUT") != string::npos){
+								dataSetNo = '2';
+								sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
+							}
+							if(lineNoSpaces.find("SIGNALS") != string::npos){
+								dataSetNo = '3';
+								sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
+							}
+							if(lineNoSpaces.find("CLOCK") != string::npos){
+								dataSetNo = 'c';
+								sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
+							}	
+					/*	if (lineNoSpaces.find("begin") != string::npos){
 
-						}
-						else if(entity == true && dataSetNo == '1' && lineNoSpaces.find("OUTPUT") != string::npos){
-							dataSetNo = '2';
-							sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
-							
-
-						}
-						else if(entity == true && dataSetNo == '2' && lineNoSpaces.find("SIGNALS") != string::npos){
-							dataSetNo = '3';
-							sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
-							
-
-						}
-						else if(entity == true && dataSetNo == '3' && lineNoSpaces.find("CLOCK") != string::npos){
-							dataSetNo = 'c';
-							sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
-							
-						}				
-						
+						}//if (begin) */
 				}//if (empty)
 			} //if (!end)
 			else {
@@ -132,7 +122,7 @@ void sigLiErz::discriminate(vector<string> csd){
 
 /*Erzeugt zu jedem der in den Zeilen "INPUT" bis "CLOCK" der csd.txt enthaltenen Signalnamen
 eine neue Instanz der Klasse Signal. ---erweitert "discriminate"---*/ 
-void sigLiErz::grabSignals(char type,string currentLine){
+void sigLiErz::grabSignals(char type, string currentLine){
 	switch(type){
 	case '1': //Inputzeile
 		currentLine.erase(currentLine.find("INPUT"), 5);
@@ -145,7 +135,7 @@ void sigLiErz::grabSignals(char type,string currentLine){
 			newSignal.setSignalTyp(eingang);
 			//newSignal push_back?
 		}
-
+		break;
 	case '2': //Outputzeile
 		currentLine.erase(currentLine.find("OUTPUT"), 6);
 		while(!currentLine.empty()){
@@ -157,6 +147,7 @@ void sigLiErz::grabSignals(char type,string currentLine){
 			newSignal.setSignalTyp(ausgang);
 			//newSignal push_back?
 		}
+		break;
 	case '3': //Signalzeile
 		currentLine.erase(currentLine.find("SIGNALS"), 7);
 		while(!currentLine.empty()){
@@ -168,35 +159,59 @@ void sigLiErz::grabSignals(char type,string currentLine){
 			newSignal.setSignalTyp(unbekannt);
 			//newSignal push_back?
 		}
+		break;
 	case 'c': //Taktzeile
-		currentLine.erase(currentLine.find("Clock"), 5);
-		while(!currentLine.empty()){
+		currentLine.erase(currentLine.find("CLOCK"), 5);
+		if(!currentLine.empty()){
+			long double frequency = 0;
 			size_t posS = currentLine.find('c');
 			currentLine.erase(posS, 4);
 			stack<int> no;
-				for(string::iterator digits = currentLine.begin(); digits != currentLine.end(); digits++){
-				char a = *digits; 
-				int d = 0;
-				if(a != '0' || a != '1' || a != '2' || a != '3' || a != '4' || a != '5' || a != '6' ||a != '7' || a != '8' || a != '9'){
-					continue;
-				}
-				else {
-					d = a - '0';
-				}
-				no.push(d);
-			}
-			while(!no.empty()){	
-				int n = no.top();
-				cout << n << endl;
-				no.pop();
-			}
-			/*long double frequency = 0;
-			signal newSignal;
+			string::iterator deleteThis;
+			string::iterator digits = currentLine.begin();
+					while(digits != currentLine.end()){
+						char a = *digits; 
+						int d = 0;
+						if(a != '0' && a != '1' && a != '2' && a != '3' && a != '4' && a != '5' && a != '6' && a != '7' && a != '8' && a != '9'){
+							digits++;
+							continue;
+						}
+						else {
+							d = a - '0';
+							deleteThis = digits;
+							digits++;
+							currentLine.erase(deleteThis);
+						}
+						no.push(d);
+						digits = deleteThis;
+					}
+					if(!no.empty()){	
+						for(int pot = 0; !no.empty() ; pot++){
+							int n = no.top();
+							frequency += n*(pow(10,pot));
+							no.pop();
+						}
+					}
+				char proportion = currentLine.at(currentLine.find("Hz")-1);
+				switch(proportion){
+				default: 
+					break;
+				case 'K':
+					frequency *= pow(10,3);
+				case 'k':
+					frequency *= pow(10,3);
+				case 'M':
+					frequency *= pow(10,6);
+				};
+				cout << frequency << endl;
+			
+			/*signal newSignal;
 			newSignal.setName("clk"); 
 			newSignal.setSignalTyp(takt);
 			newSignal.setFreq(frequency);
 			//newSignal push_back?*/
 		}
+		break;
 	default:
 		cout << "Err. @ func. sigLiErz::grabSignals(): Fehlfunktion auf switch-ebene. Übergebene case-parameter prüfen." << endl << endl;
 		break;
