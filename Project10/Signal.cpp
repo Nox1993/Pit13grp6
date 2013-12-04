@@ -43,7 +43,12 @@ string signal::getQuellenTyp(){
 }
 
 string signal::getZiel(int pos){
-	return "NULL";
+	if(pos >= 0 && pos <5){  
+		return ziele[pos];
+	}
+	else {
+		cout << "Err. @ func. singnal::zielHinzufügen: Pos. out of Array boundaries.";
+	}w
 }
 
 signalTypen signal::getSignalTyp(){
@@ -80,9 +85,7 @@ void signal::zielHinzufügen(string gatterName,int pos){
 	}
 	else {
 		cout << "Err. @ func. singnal::zielHinzufügen: Pos. out of Array boundaries.";
-	}
-
-		
+	}	
 }
 //------------------------------------------------------------------------------------
 //Methoden:

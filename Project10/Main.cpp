@@ -4,6 +4,7 @@
 #include "signalListeErzeuger.h"
 #include "Faktoren.h"
 
+
 using namespace std; 
 
 int main(){
@@ -18,6 +19,7 @@ int main(){
 	cout << endl << "Datei Eingelesen." << endl << endl;
 
 	s.discriminate(s.getCsdLineByLine());
+
 	cout << "Nochmal ausfuehren? [j/n]"; 
 	cin.sync();
 	cin >> input; 

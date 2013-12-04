@@ -194,22 +194,23 @@ void sigLiErz::grabSignals(char type, string currentLine){
 					}
 				char proportion = currentLine.at(currentLine.find("Hz")-1);
 				switch(proportion){
-				default: 
-					break;
 				case 'K':
 					frequency *= pow(10,3);
+					break;
 				case 'k':
 					frequency *= pow(10,3);
+					break;
 				case 'M':
 					frequency *= pow(10,6);
+					break;
+				default: 
+					break;
 				};
-				cout << frequency << endl;
-			
-			/*signal newSignal;
+ 			signal newSignal;
 			newSignal.setName("clk"); 
 			newSignal.setSignalTyp(takt);
 			newSignal.setFreq(frequency);
-			//newSignal push_back?*/
+			signalListe["clk"] = newSignal;
 		}
 		break;
 	default:

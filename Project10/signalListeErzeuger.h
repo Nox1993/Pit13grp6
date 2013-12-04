@@ -8,6 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <stack>
+#include <list >
 #include <math.h>
 
 using namespace std;
@@ -22,7 +23,8 @@ public:
 	vector<string> read();
 	vector<string> getCsdLineByLine();
 	void setDatei(string pathCsd);
-	
+	list<signal> signalListe;
+
 private:
 	//vars
 	signal signale;
@@ -33,6 +35,7 @@ private:
 	//func
 	void grabSignals(char type, string currentLine);
 	string deleteSpaces(string input);
+	
 };
 
 #endif //SIGNALLISTEERZEUGER_H
