@@ -26,7 +26,7 @@ void Faktoren::ausgabeFaktoren(){
 }
 
 void Faktoren::getFaktoren(double& spgFaktor, double& tmpFaktor, double& przFaktor){
-	 
+
 	//wird erst später gebraucht, dient zum Lesen (über Referenzübergabe) der entsprechenden privaten Attribute
 }
 

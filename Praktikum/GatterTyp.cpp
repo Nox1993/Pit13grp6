@@ -12,60 +12,60 @@ GatterTyp::~GatterTyp(void)
 {
 }
 
-string GatterTyp::getName(){
+string GatterTyp::getName() {
 
 return name;
 
 }
 
-double GatterTyp::getGrundLaufzeit(){
+double GatterTyp::getGrundLaufzeit() {
 
 	return grundLaufzeit;
 }
 
-short GatterTyp::getLastFaktor(){
+short GatterTyp::getLastFaktor() {
 
 	return lastFaktor;
 
 }
 
-short GatterTyp::getEingaenge(){
+short GatterTyp::getEingaenge() {
 
 	return eingaenge;
 
 }
 
- bool GatterTyp::getIsFlipflop(){
+ bool GatterTyp::getIsFlipflop() {
 
 	return false;
 
 }
 
-void GatterTyp::setName(string n){
+void GatterTyp::setName(string n) {
 
 	name=n;
 
 }
 
-void GatterTyp::setGrundLaufzeit(double gl){
+void GatterTyp::setGrundLaufzeit(double gl) {
 
 	grundLaufzeit=gl;
 
 }
 
-void GatterTyp::setLastFaktor(short lf){
+void GatterTyp::setLastFaktor(short lf) {
 
 	lastFaktor=lf;
 
 }
 
-void GatterTyp::setLastKapazitaet(short lk){
+void GatterTyp::setLastKapazitaet(short lk) {
 
 	lastKapazitaet=lk;
 
 }
 
-void GatterTyp::setEingaenge(short ei){
+void GatterTyp::setEingaenge(short ei) {
 
 	eingaenge=ei;
 

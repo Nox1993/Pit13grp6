@@ -39,10 +39,10 @@
     <ClInclude Include="itiv_win_drv.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="GatterTyp.h">
+    <ClInclude Include="Flipflop.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Flipflop.h">
+    <ClInclude Include="GatterTyp.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -68,10 +68,13 @@
     <ClCompile Include="LaufzeitAnalysator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="GatterTyp.cpp">
+    <ClCompile Include="Flipflop.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Flipflop.cpp">
+    <ClCompile Include="mainPraktikum.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="GatterTyp.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

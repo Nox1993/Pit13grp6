@@ -1,5 +1,6 @@
 #pragma once
 #include "GatterTyp.h"
+#include "Flipflop.h"
 #include <vector>
 #include <iostream>
 #include <string>
@@ -19,12 +20,16 @@ public:
 	bool pfadEinlesen(string pfad);
 	void dateiAusgabe(vector<string> out);
 	void read(string path);
+	vector<string> getRaw();
+	void bauteilNamen(vector<string> bauteile);
+
 private:
 	vector<string> bibRaw;
 	vector <GatterTyp*> bibElemente;
 	string datei;
 	void openError();
 	void readError();
+	int endeBauteile;
 	
 };
 
