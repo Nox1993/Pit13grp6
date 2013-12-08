@@ -19,13 +19,14 @@ public:
 	//func
 	sigLiErz();
 	~sigLiErz();
-	void outputVector(vector<string> out);
 	void discriminate(vector<string> csd);
 	vector<string> read();
 	vector<string> getCsdLineByLine();
 	void setDatei(string pathCsd);
-	list<signal> signalListe;
 	void printList(list<signal> input);
+	void mapToList();
+	//vars
+	list<signal> signalListe;
 
 private:
 	//vars
@@ -34,12 +35,14 @@ private:
 	string datei;
 	long frequenz;
 	vector<string> csdLineByLine;
+	map<string, signal> signalMap;
 	//func
+	void outputVector(vector<string> out);
 	void grabSignals(char type, string currentLine);
 	string deleteSpaces(string input);
 	string dissipateType(signal print);
-	void mapToList();
-	map<string, signal> signalMap;
+	
+
 };
 
 #endif //SIGNALLISTEERZEUGER_H

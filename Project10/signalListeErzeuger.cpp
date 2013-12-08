@@ -82,12 +82,13 @@ string sigLiErz::deleteSpaces(string input){
 void sigLiErz::discriminate(vector<string> csd){
 	vector<string> input = csd;										//Kopie des übergebene Vektors erstellen. 
 	char dataSetNo = ' '; 
+	bool begin = false;
 	if(!input.empty()){ 
 		for(int a = 0; input.begin()+a != input.end(); a++){		//Äussere Schleife. Iteriert duch Vektor. 
 			string line = input.at(a);						
 			string lineNoSpaces = sigLiErz::deleteSpaces(line);
 			cout << "interesting part" << endl;
-			if(lineNoSpaces.find("END") == string::npos){		//Innere Schleife. Läuft nur bis END-Zeile erreicht. 
+			if(lineNoSpaces.find("END") == string::npos){			//Innere Schleife. Läuft nur bis END-Zeile erreicht. 
 				if(!lineNoSpaces.empty()){							//Läuft nicht überflüssigerweise in Leerzeilen.
 							if(lineNoSpaces.find("INPUT") != string::npos){
 								dataSetNo = '1';
@@ -108,6 +109,13 @@ void sigLiErz::discriminate(vector<string> csd){
 								dataSetNo = 'c';
 								sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
 								continue;
+							}
+							if(lineNoSpaces.find("BEGIN") != string::npos){
+								begin = true;
+								continue;
+							}
+							if(begin == true){
+
 							}
 							else {
 								continue;
@@ -229,6 +237,17 @@ void sigLiErz::grabSignals(char type, string currentLine){
 }
 
 
+
+//Schreibt alle Elemente der map (¬keys) in eine STL-List
+void sigLiErz::mapToList(){
+	map<string,signal>::iterator it;
+	for(it = signalMap.begin(); it != signalMap.end(); it++){
+		signalListe.push_back(it->second);
+	}
+
+}
+
+//Ausgabe aller Signale & verfügbaren Informationen über dieselben. 
 void sigLiErz::printList(list<signal> input){
 	signal printThis;
 	list<signal>::iterator it; 
@@ -253,7 +272,7 @@ void sigLiErz::printList(list<signal> input){
 
 }
 
-//Hilfsfunkt für "printList" ordnet den ints aus signlatyp text zu.
+//Hilfsfunkt für "printList" ordnet den ints aus Signaltyp Text zu.
 string sigLiErz::dissipateType(signal print){
 	int i = print.getSignalTyp();
 	switch(i){
