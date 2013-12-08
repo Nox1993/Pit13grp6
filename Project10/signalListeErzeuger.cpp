@@ -87,7 +87,6 @@ void sigLiErz::discriminate(vector<string> csd){
 		for(int a = 0; input.begin()+a != input.end(); a++){		//Äussere Schleife. Iteriert duch Vektor. 
 			string line = input.at(a);						
 			string lineNoSpaces = sigLiErz::deleteSpaces(line);
-			cout << "interesting part" << endl;
 			if(lineNoSpaces.find("END") == string::npos){			//Innere Schleife. Läuft nur bis END-Zeile erreicht. 
 				if(!lineNoSpaces.empty()){							//Läuft nicht überflüssigerweise in Leerzeilen.
 							if(lineNoSpaces.find("INPUT") != string::npos){
@@ -145,6 +144,7 @@ void sigLiErz::grabSignals(char type, string currentLine){
 			signal newSignal;
 			newSignal.setName(name); 
 			newSignal.setSignalTyp(eingang);
+			newSignal.setQuelle("Schaltwerksinput");
 			signalMap[name] = newSignal;
 		}
 		break;
@@ -157,6 +157,7 @@ void sigLiErz::grabSignals(char type, string currentLine){
 			signal newSignal;
 			newSignal.setName(name); 
 			newSignal.setSignalTyp(ausgang);
+			newSignal.zielHinzufügen("Output des Schaltwerks", 0);
 			signalMap[name] = newSignal;
 		}
 		break;
@@ -239,20 +240,22 @@ void sigLiErz::assignInfo(string currentLine){
 	currentLine.erase(posG, 5);
 	size_t posBr = currentLine.find('(');
 	string gateType = currentLine.substr(0, posBr - 0);
-	currentLine.erase(0, posBr);
-	while(!currentLine.empty() && currentLine.length() >= 6){
+	currentLine.erase(0, posBr + 1);
+	while(!currentLine.empty() && currentLine.length() > 6){
 		if(currentLine.find("clk") != string::npos){
 			signalMap["clk"].zielHinzufügen(gateName, signalMap["clk"].getAnzahlZiele());
 			signalMap["clk"].setAnzahlZiele(signalMap["clk"].getAnzahlZiele() + 1);
 			currentLine.erase(currentLine.find('c'), 4);
 		}
 		size_t posS = currentLine.find('s');
-		string name = currentLine.substr(posS, 4);
-		currentLine.erase(posS, 5);
-		signalMap[name].zielHinzufügen(gateName, signalMap[name].getAnzahlZiele());
-		signalMap[name].setAnzahlZiele(signalMap[name].getAnzahlZiele() + 1);
+		//if(currentLine.length() - posS > 6){
+			string name = currentLine.substr(posS, 4);
+			currentLine.erase(posS, 5);
+			signalMap[name].zielHinzufügen(gateName, signalMap[name].getAnzahlZiele());
+			signalMap[name].setAnzahlZiele(signalMap[name].getAnzahlZiele() + 1);
+		//}
 	}
-	if(!currentLine.empty() && currentLine.length() == 6){
+	if(!currentLine.empty()){
 		size_t posS = currentLine.find('s');
 		string name = currentLine.substr(posS, 4);
 		currentLine.erase(posS, 6);
