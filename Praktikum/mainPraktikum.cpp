@@ -7,7 +7,7 @@ using namespace std;
 
 
 int main() {
-	string path;
+//	string path;
 //	cin.sync();
 //	cin>>path;
 
@@ -15,7 +15,9 @@ int main() {
 	b.read("C:\\Users\\Sabrina\\Desktop\\1.txt");
 	b.dateiAusgabe (b.getRaw());
 	cout<< "dhdnnjhfbdkjsnfkjdsbbbbbbbbbbbkjdfbsdkjb"<<endl;
-	b.bauteilNamen(b.getRaw());
+	b.bauteileAuslesen(b.getRaw());
+	GatterTyp* testG = b.getBibElement("inv1a");
+	cout << testG->getGrundLaufzeit() << endl;
 	cin.sync();
 	cin.get();
 }

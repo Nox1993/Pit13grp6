@@ -1,5 +1,5 @@
 #include "GatterTyp.h"
-
+#include "Flipflop.h"
 
 
 
@@ -28,6 +28,13 @@ short GatterTyp::getLastFaktor() {
 	return lastFaktor;
 
 }
+
+short GatterTyp::getLastKapazitaet() {
+	 
+	return lastKapazitaet;
+
+}
+
 
 short GatterTyp::getEingaenge() {
 

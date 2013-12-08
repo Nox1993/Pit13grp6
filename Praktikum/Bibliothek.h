@@ -21,7 +21,7 @@ public:
 	void dateiAusgabe(vector<string> out);
 	void read(string path);
 	vector<string> getRaw();
-	void bauteilNamen(vector<string> bauteile);
+	void Bibliothek::bauteileAuslesen (vector<string> bauteile); //Testzweck
 
 private:
 	vector<string> bibRaw;
@@ -29,7 +29,6 @@ private:
 	string datei;
 	void openError();
 	void readError();
-	int endeBauteile;
-	
+	int endeBauteile; //wozu gut? :D	
 };
 

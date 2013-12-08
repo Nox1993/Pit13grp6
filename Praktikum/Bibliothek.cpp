@@ -11,7 +11,7 @@ Bibliothek::Bibliothek(void)
 
 Bibliothek::~Bibliothek(void)
 {
-	for(int i = 0; i < bibElemente.size(); i++) {
+	for(unsigned int i = 0; i < bibElemente.size(); i++) {
 		delete bibElemente[i];
 	}
 }
@@ -86,7 +86,6 @@ void Bibliothek::read (string path){
 	else {
 		cout<<"Fehler beim Einlesen der Bibliotheksdatei!"<<endl;
 	}
-
 }
 
 	/*
@@ -95,130 +94,136 @@ void Bibliothek::read (string path){
 	Flipflop kann dabei am Namen erkannt werden, welcher als bekannt vorausgesetzt wird. Das FF wird in einem Element
 	vom Typ FF im Vektor bibElemente gespeichert.
 	*/
-void Bibliothek::dateiAuswerten(){
-	endeBauteile=0;
-	void bauteilNamen(vector <string> bauteile);		
+void Bibliothek::dateiAuswerten(){	
+	void bauteileAuslesen (vector <string> bauteile);		
 }
 
-
-void Bibliothek::bauteilNamen (vector<string> bauteile){ //Achtung: nur zu Testzwecken Methode von "Bibliothek", normalerweise Funktion innerhalb dateiAuswerten. Fkt liest die Bauteilnamen aus und erstellt für jedes Bauteil einen neuen "GatterTyp"
-
-	string zeile; //beschreibt die aktuell eingelesene Zeile
-	bool found = false; 
-	
-	for (int a = 0; bauteile.begin()+a != bauteile.end(); a++){ //findet die Bauteilnamen innerhalb der Bibdatei und erstellt für jedes Bauteil einen neuen "GatterTyp"
-		string zeile = bauteile.at(a);
-		if (zeile.find("Bausteine") != zeile.npos && found==false) { //wenn das Wort "Bausteine gefunden wurde, wird "found" gleich "true" gesetzt
-			found = true;			
+void Bibliothek::bauteileAuslesen (vector<string> bauteile) { //liest die Bauteile mitsamt den dazugehörigen Attributen aus, indem nacheinander die Vektorzeilen ausgelesen werden und nach der eckigen klammer mit dem ersten Bauteilnamen gesucht wird. Wenn diese Zeile gefunden wird, werden die Attribute nacheinander eingelesen. 
+	string zeile;
+	bool found = false;
+	string name;
+	for (int a = 0; bauteile.begin()+a != bauteile.end(); a++) {
+		zeile=bauteile.at(a);
+		cout << zeile << endl;
+		if(zeile.compare ("") == 0) { //Leerzeile gefunden, 
+			found = true;
 			continue;
-		}	
-		if (found==true && zeile.compare("") == 0) { //wenn "found" gleich "true" ist und eine leere Zeile gefunden wird, wird "found" wieder "false" gesetzt
+		}
+		if(zeile.compare("[[Bausteine]]")==0) {
 			found = false;
-			endeBauteile = a ;			// legt das Ende der Bauteile fest
+			continue;
 		}
-		if (found==true && zeile.find("dff") == zeile.npos ) { //wenn "found" gleich "true" ist, befindet sich die zeile in den Bauteilnamen. (Achtung: aktuell noch mit Leerzeile!)
-			
+		if(found == true && zeile.find("[") != zeile.npos && zeile.find("[dff]") == zeile.npos) {
+			zeile.erase(0,1);
+			unsigned int letztePos = zeile.length()-1;
+			zeile.erase(letztePos,1);			
+			name = zeile;// die nächste Zeile beschreibt wahrscheinlich ein Attribut des Gatters.		
 			GatterTyp* neuesGatter = new GatterTyp();
-			neuesGatter->setName(zeile);
-			bibElemente.push_back(neuesGatter);			
-			found = true;
-		}			
-		if (found==true && zeile.find("dff")!= zeile.npos) {
-			GatterTyp* neuesGatter = new Flipflop();
-			neuesGatter->setName(zeile);
+			neuesGatter->setName(name);
+			int b = a+1;
+			for (int b = a+1; b < a + 1 + 4 ; b++) {
+				string gatterZeile = bauteile.at(b);
+				if(gatterZeile.find("ei:")!= string::npos) {
+					gatterZeile.erase(0,3);
+					double eingaenge = atof(gatterZeile.c_str());
+					neuesGatter->setEingaenge(eingaenge);
+				}
+				if(gatterZeile.find("tpd0:")!= string::npos) {
+					gatterZeile.erase(0,5);
+					double laufzeit = atof(gatterZeile.c_str());
+					neuesGatter->setGrundLaufzeit(laufzeit);
+				}
+				if(gatterZeile.find("kl:")!= string::npos) {
+					gatterZeile.erase(0,3);
+					double lastfaktor = atof(gatterZeile.c_str());
+					neuesGatter->setLastFaktor(lastfaktor);
+				}
+				if(gatterZeile.find("cl:")!= string::npos) {
+					gatterZeile.erase (0,3);
+					double kapazitaet = atof(gatterZeile.c_str());
+					neuesGatter->setLastKapazitaet(kapazitaet);
+				}
+				if(gatterZeile.find("#endfile") != string::npos) {
+					break;
+				}			
+			}
+			a = b;
 			bibElemente.push_back(neuesGatter);
-			found = true;
-			
-			for (int i=0 ; bibElemente.size() > i ; i++) { //Probeausgabe des Vektors bibElemente
-				cout << bibElemente.at(i)->getName() << endl;
-			}
+			continue;
 		}
-	}
-	void attributeSpeichern (vector <string> bauteile, vector <GatterTyp*> bibElemente, int endeBauteile); //ruft die fkt attributeSpeichern auf
+		if(found == true && zeile.find("[dff]")!= zeile.npos) { //Zeile ist ein Flipflop
+			zeile.erase(0,1);
+			unsigned int letztePos = zeile.length()-1;
+			zeile.erase(letztePos,1);
+			Flipflop* neuesGatter = new Flipflop();
+			neuesGatter->setName(zeile);
+			int b = a+1;
+			for (int b = a+1; b < a + 1 + 8; b++) {
+				string ffZeile = bauteile.at(b);
+				if(ffZeile.find("ed:")!= string::npos) {
+					ffZeile.erase (0,3);
+					double eingang = atof(ffZeile.c_str());
+					neuesGatter->setEingaenge(eingang);		
+				}
+				if(ffZeile.find("tsetup:")!= string::npos) {
+					ffZeile.erase (0,7);
+					double setUp = atof(ffZeile.c_str());
+					neuesGatter->setSetupTime(setUp);
+				}
+				if(ffZeile.find("thold:")!= string::npos) {
+					ffZeile.erase (0,6);
+					double holdTime = atof(ffZeile.c_str());
+					neuesGatter->setHoldTime(holdTime);
+				}
+				if(ffZeile.find("cd:")!= string::npos){
+					ffZeile.erase (0,3);
+					double kapazitaet = atof(ffZeile.c_str());
+					neuesGatter->setLastKapazitaet(kapazitaet);
+				}
+				if(ffZeile.find("et:")!= string::npos) {
+					ffZeile.erase (0,3);
+					double taktEingang = stof(ffZeile.c_str());
+					neuesGatter->setEingaenge(taktEingang);
+				}
+				if(ffZeile.find("tpdt:")!= string::npos) {
+					ffZeile.erase (0,5);
+					double grundLaufzeit = atof(ffZeile.c_str());
+					neuesGatter->setGrundLaufzeit(grundLaufzeit);
+				}
+				if(ffZeile.find("kl:")!= string::npos) {
+					ffZeile.erase (0,3);
+					double lastFaktor = atof(ffZeile.c_str());
+					neuesGatter->setLastFaktor(lastFaktor);
+				}
+				if(ffZeile.find("ct:")!= string::npos) {
+					ffZeile.erase (0,3);
+					double kapazitaetClock = atof(ffZeile.c_str());
+					neuesGatter->setLastKapazitaetClock(kapazitaetClock);
+				}
+				if(ffZeile.find("#endfile")!= string::npos) {
+					break;
+				}				// die nächste Zeile beschreibt wahrscheinlich ein Attribut des Flipflops.
+			}
+			a=b;
+			bibElemente.push_back(neuesGatter);
+		}		
+	}	
 }
 
 
-//Sucht die Attribute zu den Bauteilnamen und speichert diese in bibElemente ab; nur zu Testzwecken eine Methode der Bibliothek-Klasse
-void attributeSpeichern (vector <string> bauteile, vector <GatterTyp*> bibElemente, int endeBauteile) { 
-	string ausgelesenerName;
-	for (int i=0; bibElemente.size() > 1; i++) {
-		string name = bibElemente.at(i)->getName();
-		for (int b = endeBauteile; bauteile.begin()+b != bauteile.end(); b++) {
-			unsigned int found = 0; // 0: aktuelle zeile befindet sich entweder vor einem Datenblock oder in einer leeren Zeile. 1: wird gesetzt, wenn ein Bauteilname gefunden wird und danach dann Attribute eingelesen werden können. 2: wie 1, nur der gefundene Name ist ein Flipflop.
-			string zeile = bauteile.at(b);
-
-			if(found == 1 && zeile.compare ("") == 0) { //Leerzeile gefunden, 
-				found = 0;
-			}			
-			if(zeile.compare(name) > 0) { // Zeile enthält den Namen
-				if(name=="dff") {
-					found = 2;
-				}
-				else {
-					found = 1;					
-				}
-				ausgelesenerName=name;
-				continue;
-			}	
-			if(found== 1) {//nochmal überdenken. eigentlich ist ja nach dem namen schon gesucht,oder? neu: 
-				// Zeile befindet sich zwischen der Zeile mit Bauteilnamen und der Leerzeile
-				//fallunterscheidung nach "ei/tpd/kl/cl" dann Zuordnung in jeweiliges GatterTyp, vorher noch abchecken ob flipflop oder nicht 
-				if(zeile.find("ei:")) {
-					zeile.erase(0,3);
-					b
-				}
-				if(zeile.find("tpd:")) {
-					zeile.erase(0,3);
-				}
-				if(zeile.find("kl:")) {
-					zeile.erase(0,3);
-				}
-				if(zeile.find("cl:")) {
-					zeile.erase (0,3);
-				}
-			}
 
 
-			if(found==2) { //liest die Attribute vom Flipflop in den Vektor Bauteile ein
-				if(zeile.find("ed:")) {
-					zeile.erase (0,3);
-				}
-				if(zeile.find("tsetup:")) {
-					zeile.erase (0,7);
-				}
-				if(zeile.find("thold:")) {
-					zeile.erase (0,6);
-				}
-				if(zeile.find("cd:")){
-					zeile.erase (0,3);
-				}
-				if(zeile.find("et:")) {
-					zeile.erase (0,3);
-				}
-				if(zeile.find("tpdt:")) {
-					zeile.erase (0,5);
-				}
-				if(zeile.find("kl:")) {
-					zeile.erase (0,3);
-				}
-				if(zeile.find("ct:")) {
-					zeile.erase (0,3);
-				}
-			}
-
-		}
-	}
-}
-
-
-/*
 GatterTyp* Bibliothek::getBibElement (string typ){
-	GatterTyp::getLastFaktor;
-	 return GatterTyp::&lastFaktor;
+	for (int i = 0; bibElemente.begin() + i != bibElemente.end(); i++ ) {
+		string name = bibElemente.at(i)->getName();
+		if (name.compare(typ) == 0) {
+			return bibElemente.at(i);
+		}
+	}	 
 	 /*dieser Methode wird ein String, des Gattertyps übergeben (z.B. inv1a).
-	 Sie gibt einen Zeiger auf das entsprechende Element vom Typ Gattertyp zurück.
+	 Sie gibt einen Zeiger auf das entsprechende Element vom Typ Gattertyp zurück.*/
 }
-*/
+
 
 vector<string> Bibliothek::getRaw (){
 	return  bibRaw;

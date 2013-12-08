@@ -11,6 +11,7 @@ public:
 	double getGrundLaufzeit();
 	short getLastFaktor();
 	short getEingaenge();
+	short getLastKapazitaet();
 	virtual bool getIsFlipflop();
 	void setName(string n);
 	void setGrundLaufzeit(double gl);
