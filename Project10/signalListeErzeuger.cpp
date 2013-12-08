@@ -42,7 +42,7 @@ vector<string> sigLiErz::read(){
 }
 
 //Ausgabe der in einem Vektor abgespeicherten csd.txt (Zeilen durchnummeriert)  
-void sigLiErz::outputVector(vector<string> out){
+void sigLiErz::outputCsd(vector<string> out){
 	if(!out.empty()){
 		int lineNo2 = 1;
 		int lineNo1 = 0;
@@ -115,15 +115,11 @@ void sigLiErz::discriminate(vector<string> csd){
 								continue;
 							}
 							if(begin == true){
-
+								sigLiErz::assignInfo(lineNoSpaces);
 							}
 							else {
 								continue;
 							}
-
-					/*	if (lineNoSpaces.find("begin") != string::npos){
-
-						}//if (begin) */
 				}//if (empty)
 			} //if (!end)
 			else {
@@ -137,7 +133,7 @@ void sigLiErz::discriminate(vector<string> csd){
 }
 
 /*Erzeugt zu jedem der in den Zeilen "INPUT" bis "CLOCK" der csd.txt enthaltenen Signalnamen
-eine neue Instanz der Klasse Signal. ---erweitert "discriminate"---*/ 
+eine neue Instanz der Klasse Signal und legt diese in der Map mit dem jeweiligen Namen als Schlüssel ab. ---erweitert "discriminate"---*/ 
 void sigLiErz::grabSignals(char type, string currentLine){
 	switch(type){
 	case '1': //Inputzeile
@@ -236,9 +232,37 @@ void sigLiErz::grabSignals(char type, string currentLine){
 	//Hatte keine Lust elend lange Methodenketten aufzumachen. Deswegen der sich wiederholende Code. Sorry. 
 }
 
+//Wertet den Teil der csd.txt zwischen "BEGIN" ud "END" aus
+void sigLiErz::assignInfo(string currentLine){
+	size_t posG = currentLine.find('g');
+	string gateName = currentLine.substr(posG, 4);
+	currentLine.erase(posG, 5);
+	size_t posBr = currentLine.find('(');
+	string gateType = currentLine.substr(0, posBr - 0);
+	currentLine.erase(0, posBr);
+	while(!currentLine.empty() && currentLine.length() >= 6){
+		if(currentLine.find("clk") != string::npos){
+			signalMap["clk"].zielHinzufügen(gateName, signalMap["clk"].getAnzahlZiele());
+			signalMap["clk"].setAnzahlZiele(signalMap["clk"].getAnzahlZiele() + 1);
+			currentLine.erase(currentLine.find('c'), 4);
+		}
+		size_t posS = currentLine.find('s');
+		string name = currentLine.substr(posS, 4);
+		currentLine.erase(posS, 5);
+		signalMap[name].zielHinzufügen(gateName, signalMap[name].getAnzahlZiele());
+		signalMap[name].setAnzahlZiele(signalMap[name].getAnzahlZiele() + 1);
+	}
+	if(!currentLine.empty() && currentLine.length() == 6){
+		size_t posS = currentLine.find('s');
+		string name = currentLine.substr(posS, 4);
+		currentLine.erase(posS, 6);
+		signalMap[name].setQuelle(gateName);
+		signalMap[name].setQuellentyp(gateType);
+	}
+}
 
 
-//Schreibt alle Elemente der map (¬keys) in eine STL-List
+//Schreibt alle Elemente der Map (Signale) in eine STL-List
 void sigLiErz::mapToList(){
 	map<string,signal>::iterator it;
 	for(it = signalMap.begin(); it != signalMap.end(); it++){
@@ -256,6 +280,7 @@ void sigLiErz::printList(list<signal> input){
 		cout << "Signale:" << endl << "-----" << endl;
 		cout << "Signalname: " << printThis.getName() << endl; 
 		cout << "Signaltyp: " << sigLiErz::dissipateType(printThis) << endl; 
+		cout << "Taktfrequenz: " << printThis.getFreq() << "Hz" << endl;
 		cout << "Signalquelle: " << printThis.getQuelle() << endl; 
 		cout << "--> Das Signal hat " << printThis.getAnzahlZiele() << " Ziele." << endl; 
 		cout << "Ziel-Gatter: ";
@@ -286,8 +311,9 @@ string sigLiErz::dissipateType(signal print){
 		return "unbekannt";
 	case 4:
 		return "takt";
-		default:
-			break;
+	default:
+		return "";
+			
 	}
 }
 

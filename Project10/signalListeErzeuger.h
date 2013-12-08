@@ -37,11 +37,11 @@ private:
 	vector<string> csdLineByLine;
 	map<string, signal> signalMap;
 	//func
-	void outputVector(vector<string> out);
+	void outputCsd(vector<string> out);
 	void grabSignals(char type, string currentLine);
 	string deleteSpaces(string input);
 	string dissipateType(signal print);
-	
+	void assignInfo(string currentLine);
 
 };
 
