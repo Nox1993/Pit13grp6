@@ -19,6 +19,7 @@ int main(){
 	cout << endl << "Datei Eingelesen." << endl << endl;
 
 	s.discriminate(s.getCsdLineByLine());
+	s.printList(s.signalListe);
 
 	cout << "Nochmal ausfuehren? [j/n]"; 
 	cin.sync();

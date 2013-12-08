@@ -48,7 +48,7 @@ string signal::getZiel(int pos){
 	}
 	else {
 		cout << "Err. @ func. singnal::zielHinzufügen: Pos. out of Array boundaries.";
-	}w
+	}
 }
 
 signalTypen signal::getSignalTyp(){

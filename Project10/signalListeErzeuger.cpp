@@ -92,19 +92,27 @@ void sigLiErz::discriminate(vector<string> csd){
 							if(lineNoSpaces.find("INPUT") != string::npos){
 								dataSetNo = '1';
 								sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
+								continue;
 							}
 							if(lineNoSpaces.find("OUTPUT") != string::npos){
 								dataSetNo = '2';
 								sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
+								continue;
 							}
 							if(lineNoSpaces.find("SIGNALS") != string::npos){
 								dataSetNo = '3';
 								sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
+								continue;
 							}
 							if(lineNoSpaces.find("CLOCK") != string::npos){
 								dataSetNo = 'c';
 								sigLiErz::grabSignals(dataSetNo, lineNoSpaces);
-							}	
+								continue;
+							}
+							else {
+								continue;
+							}
+
 					/*	if (lineNoSpaces.find("begin") != string::npos){
 
 						}//if (begin) */
@@ -127,37 +135,37 @@ void sigLiErz::grabSignals(char type, string currentLine){
 	case '1': //Inputzeile
 		currentLine.erase(currentLine.find("INPUT"), 5);
 		while(!currentLine.empty()){
-			size_t posS = currentLine.find('S');
+			size_t posS = currentLine.find('s');
 			string name = currentLine.substr(posS, 4);
 			currentLine.erase(posS, 5);
 			signal newSignal;
 			newSignal.setName(name); 
 			newSignal.setSignalTyp(eingang);
-			//newSignal push_back?
+			signalMap[name] = newSignal;
 		}
 		break;
 	case '2': //Outputzeile
 		currentLine.erase(currentLine.find("OUTPUT"), 6);
 		while(!currentLine.empty()){
-			size_t posS = currentLine.find('S');
+			size_t posS = currentLine.find('s');
 			string name = currentLine.substr(posS, 4);
 			currentLine.erase(posS, 5);
 			signal newSignal;
 			newSignal.setName(name); 
 			newSignal.setSignalTyp(ausgang);
-			//newSignal push_back?
+			signalMap[name] = newSignal;
 		}
 		break;
 	case '3': //Signalzeile
 		currentLine.erase(currentLine.find("SIGNALS"), 7);
 		while(!currentLine.empty()){
-			size_t posS = currentLine.find('S');
+			size_t posS = currentLine.find('s');
 			string name = currentLine.substr(posS, 4);
 			currentLine.erase(posS, 5);
 			signal newSignal;
 			newSignal.setName(name); 
 			newSignal.setSignalTyp(unbekannt);
-			//newSignal push_back?
+			signalMap[name] = newSignal;
 		}
 		break;
 	case 'c': //Taktzeile
@@ -210,7 +218,7 @@ void sigLiErz::grabSignals(char type, string currentLine){
 			newSignal.setName("clk"); 
 			newSignal.setSignalTyp(takt);
 			newSignal.setFreq(frequency);
-			signalListe["clk"] = newSignal;
+			signalMap["clk"] = newSignal;
 		}
 		break;
 	default:
@@ -220,6 +228,49 @@ void sigLiErz::grabSignals(char type, string currentLine){
 	//Hatte keine Lust elend lange Methodenketten aufzumachen. Deswegen der sich wiederholende Code. Sorry. 
 }
 
+
+void sigLiErz::printList(list<signal> input){
+	signal printThis;
+	list<signal>::iterator it; 
+	for(it = input.begin(); it != input.end(); it++){
+		printThis = *it;
+		cout << "Signale:" << endl << "-----" << endl;
+		cout << "Signalname: " << printThis.getName() << endl; 
+		cout << "Signaltyp: " << sigLiErz::dissipateType(printThis) << endl; 
+		cout << "Signalquelle: " << printThis.getQuelle() << endl; 
+		cout << "--> Das Signal hat " << printThis.getAnzahlZiele() << " Ziele." << endl; 
+		cout << "Ziel-Gatter: ";
+		for(int a = 0; a < 5; a++){
+			if(printThis.getZiel(a) != "NULL"){
+				cout << printThis.getZiel(a) << " ";
+			}
+			else {
+				continue;
+			}
+		}
+		cout << endl << "..." << endl;
+	}
+
+}
+
+//Hilfsfunkt für "printList" ordnet den ints aus signlatyp text zu.
+string sigLiErz::dissipateType(signal print){
+	int i = print.getSignalTyp();
+	switch(i){
+	case 0:
+		return "eingang";
+	case 1:
+		return "intern";
+	case 2:
+		return "ausgang";
+	case 3:
+		return "unbekannt";
+	case 4:
+		return "takt";
+		default:
+			break;
+	}
+}
 
 /*
 Project PIT2013grp6
