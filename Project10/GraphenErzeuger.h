@@ -12,23 +12,26 @@
 #include "SchaltwerkElement.h"
 #include "Bibliothek.h"
 #include "Signal.h"
+
 using namespace std;
+
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <list> // verkettete Liste
 
-class GraphenErzeuger{
+class GraphenErzeuger {
 
     private:
     GraphenErzeuger();
     ~GraphenErzeuger();
     Bibliothek::Bibliothek* bibliothek;
     ListenElement::ListenElement* startElement;
+    ListenElement::ListenElement* endElement;
     Signal::Signal* signale;
     short anzahlSignale;
+    
     public:
-    list<SchaltwerkElement*> 
+
 };
 
 
