@@ -11,45 +11,64 @@
 
 GraphenErzeuger() {
     Bibliothek::Bibliothek* bibliothek;
-    ListenElement::ListenElement* startElement;
+    startElement = NULL;
+    endElement = NULL;
     Signal::Signal* signale;
 }
 ~GraphenErzeuger() {}
 
 // Graphen des Schaltwerks mit Objekten von "SchaltwerkElement" aufbauen
 
-/*GETSIGNAL() IN "SIGNAL" BAUEN*/
-
-for( int a = 0; a < Signal::getSignale.length(); a++ ) {
-/*    ListenElement[a] = new ListenElement;
-    ListenElement[a].schaltwerkElement = ListenElement::getSchaltwerkElement();
-    ListenElement[a].next = ListenElement::getNextElement();
-    SchaltwerkElement::anzahlNachfolger = Signal::anzahlZiele;*/
-    for( int b = 0; b < a; b++ ) { // komplete bisher vorhandene Liste der Signale durchsuchen um verdopplungen auszuschließen
-        if( SchaltwerkElement::getName() == Signal::getSignal[a].getName() ) { // ist der gefundene name schon vorhanden?
-            if( ListenElement* listenPtr != NULL ) { // existier der start pointer?
-                for( ListenElement* searchPointer = startPointer; ListenElement::getNextElement() != NULL; ListenElement::getNextElement() ) { // den letzten pointer suchen
-                    if(ListenElement::getNextElement() == NULL) { // wenn der nächste pointer = NULL neuen erstellen und auf NULL zeigen lassen
-                        ListenElement::getNextElement();
-                        searchPointer = NULL; // letzer Pointer zeigt "ins Leere"
-                    }
-                }
+ListenElement* tempLastElement = NULL;
+for( int signalLoop = 0; signalLoop < Signal::signalListe.length(); signalLoop++ ) {
+    if( startElement != NULL && endElement != NULL) {
+        bool isExistingSignal = false;
+        for( list<ListenElement*>::iterator checkSignalExistingLoop = verketteteListe.begin(); checkSignalExistingLoop == verketteteListe.end(); checkSignalExistingLoop++ ) { // komplette bisher vorhandene Liste der Signale durchsuchen um verdopplungen auszuschließen
+            if( verketteteListe.at(checkSignalExistingLoop) == Signal::getSignal[signalLoop].getName() ) { // ist der gefundene name schon vorhanden?
+                isExistingSignal = true;
             }
-            else {
-                ListenElement* listenPtr = new ListenElement;
-                listenPtr::SchaltwerkElement = new SchaltwerkElement;
-                listenPtr::name = signalListe[a].getName();
-            }
+        } // ENDE for(verkettete Liste..)
+        if(!isExistingSignal) { // falls 
+            listenPtr = new ListenElement;
+            SchaltwerkElement = new SchaltwerkElement; // Zeiger auf Objekt vom Typ SchaltwerkElement
+            endElement->SchaltwerkElement->setNextElement = listenPtr;
+// falls noch nicht existiert neues Element erstellen
+// falls Existiert, einfach Signal überspringen
         }
-    }
+    } // ENDE if startpointer existiert == TRUE
+    else { // falls startElement == NULL
+        ListenElement* newListPtr = new ListenElement(); // endElement als nächstes Element in der Liste zuweisen
+        newListPtr->SchaltwerkElement = new SchaltwerkElement; // Zeiger auf Objekt vom Typ SchaltwerkElement
+        newListPtr->SchaltwerkElement::setName(signalListe[signalLoop].getName()); // name des Signals in der verkettete Liste speichern
+        newListPtr->next = NULL; // nächsten Zeiger auf NULL zeigen lassen, da er auf das Ende der Liste ist
+        tempLastElement->next = newListPoint // next pointer des vorherigen Elements mit dem letzte Element verketten
+        tempLastElement = newListPtr; // temporärer pointer zum zwischen speichern des auf das letzte Element der Liste zeigenden pointers
+
+// schleife aller signale in verketteter Liste druchlaufen
+
+
+    } // ENDE if startpointer exisiert == FALSE
     
-    for( ListenElement* zeiSchlei = startElement; ListenElement::next() != NULL; ListenElement::next() ) {
-        SchaltwerkElement::nachfolgerHinzufuegen(
-    }
     
-    
+/*
+ signale durchlaufen
+ wenn Signal schon in verketteter Liste vorhanden
+    -> nix
+ ansonsten
+    -> neues ListenElement* erstellen
+        name zuweisen
+        gattertyp zuweisen
+        next pointer erstellen
+        next pointer auf NULL zeigen lassen
+ 
+ schleife aller signale in verketteter Liste druchlaufen
+    Ziele einzelnd zuweisen
+ */
+                                                 
+                                                 
+                                                 
         
-    Signal::getSignale()[a]
+//    Signal::getSignale()[a] IST MÖGLICHER COMMAND
         
         
         
@@ -68,3 +87,5 @@ for( int a = 0; a < Signal::getSignale.length(); a++ ) {
     Überprüfen Sie auch, ob es unbeschaltete Gattereingänge gibt oder ein Gatter Ziel zu vieler Signale
     ist.*/
 }
+
+//"http://www.virtual-maxim.de/dynamische-datenstrukturen-–-einfach-verkettete-liste/"
