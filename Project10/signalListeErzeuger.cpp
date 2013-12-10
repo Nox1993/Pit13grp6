@@ -169,11 +169,11 @@ void sigLiErz::grabSignals(char type, string currentLine){
 			currentLine.erase(posS, 5);
 			signal newSignal;
 			newSignal.setName(name); 
-			newSignal.setSignalTyp(unbekannt);
+			newSignal.setSignalTyp(intern);
 			signalMap[name] = newSignal;
 		}
 		break;
-	case 'c': //Taktzeile
+	case 'c': //Taktzeile (hässliches makeshift-"tokenize", sorry :D) 
 		currentLine.erase(currentLine.find("CLOCK"), 5);
 		if(!currentLine.empty()){
 			long double frequency = 0;
