@@ -19,11 +19,12 @@ GraphenErzeuger() {
 }
 
 ListenElement* tempLastElement = NULL;
-for( int signalLoop = 0; signalLoop < Signal::signalListe.length(); signalLoop++ ) {
+for( int signalLoop = 0; signalLoop < Signal::signalListe().length(); signalLoop++ ) {
     if( startElement != NULL && endElement != NULL) {
         bool isExistingSignal = false;
-        for( list<ListenElement*>::iterator checkSignalExistingLoop = verketteteListe.begin(); checkSignalExistingLoop == verketteteListe.end(); checkSignalExistingLoop++ ) { // komplette bisher vorhandene Liste der Signale durchsuchen um verdopplungen auszuschließen
-            if( verketteteListe.at(checkSignalExistingLoop) == Signal::getSignal()[signalLoop].getName() ) { // ist der gefundene name schon vorhanden?
+        for( ListenElement* searchPtr = startElement; searchPtr != NULL; searchPtr->getSchaltwerkElement()->getNext() ) { // komplette bisher vorhandene Liste der Signale durchsuchen um verdopplungen auszuschließen
+
+            if( searchPtr->getSchaltwerkElement()->getName() == Signal::getSignal()[signalLoop].getName() ) { // ist der gefundene name schon vorhanden?
                 isExistingSignal = true;
             }
         } // ENDE for(verkettete Liste..)
@@ -37,30 +38,39 @@ for( int signalLoop = 0; signalLoop < Signal::signalListe.length(); signalLoop++
         }
     } // ENDE if startpointer existiert == TRUE
     else { // falls startElement == NULL
-        ListenElement* newListPtr = new ListenElement(); // endElement als nächstes Element in der Liste zuweisen
-        newListPtr->SchaltwerkElement = new SchaltwerkElement; // Zeiger auf Objekt vom Typ SchaltwerkElement
-        newListPtr->SchaltwerkElement::setName(signalListe()[signalLoop].getName()); // name des Signals in der verkettete Liste speichern
-        newListPtr->next = NULL; // nächsten Zeiger auf NULL zeigen lassen, da er auf das Ende der Liste ist
-        tempLastElement->next = newListPoint // next pointer des vorherigen Elements mit dem letzte Element verketten
-        tempLastElement = newListPtr; // temporärer pointer zum zwischen speichern des auf das letzte Element der Liste zeigenden pointers
-        /*
-        newListPtr->setAnzahlEingangssignale();
-        newListPtr->setAnzahlNachfolger();
-        newListPtr->setIsEingangsElement();
-        newListPtr->setIsAusgangsElement();
-        
-        void setAnzahlEingangssignale(short anzahl);
-        void setAnzahlNachfolger(int Anzahl);
-        void setIsEingangsElement(bool isEingangsEl);
-        void setIsAusgangsElement(bool isAusangsEl);
-        void setLaufzeitEinzelgatter(double lfz);
-         */
-        for(int zielLoop; zielLoop < Signal::getZiel.length(); zielLoop++) { // Ziele den dazugehörigen Signalen zuweisen
+        ListenElement* newListPtr = new ListenElement();            // endElement als nächstes Element in der Liste zuweisen
+        newListPtr->SchaltwerkElement = new SchaltwerkElement;      // Zeiger auf Objekt vom Typ SchaltwerkElement
+        newListPtr->getSchaltwerkElement()->setName(signalListe()[signalLoop].getName()); // name des Signals in der verkettete Liste speichern
+        newListPtr->getSchaltwerkElement()->setNext(NULL);                                    // nächsten Zeiger auf NULL zeigen lassen, da er auf das Ende der Liste ist
+        tempLastElement->getSchaltwerkElement()->getNext(newListPtr);                        // next pointer des vorherigen Elements mit dem letzte Element verketten
+        tempLastElement = newListPtr;       // temporärer pointer zum zwischen speichern des auf das letzte Element der Liste zeigenden pointers
+
+        for(int zielLoop; zielLoop < Signal::getZiel().length(); zielLoop++) { // Ziele den dazugehörigen Signalen zuweisen
+//!!!!!!!!!!!!!!
             SchaltwerkElement::nachfolgerHinzufuegen(Signal::getZiel()[zielLoop], zielLoop);
+//!!!!!!!!!!!
+        }
+// anzahlNachfolger wird in nachfolgerHinzufuegen direkt mit hoch gezählt
+        
+
+// VON JAN   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     newListPtr->getSchaltwerkElement()->setIsAusgangsElement(xxxxxxx);
+        short eingangssignaleCounter = 0;
+        for( list<ListenElement*>::iterator traitsLoop = verketteteListe.begin(); traitsLoop == verketteteListe.end(); traitsLoop++ ) {
+            for( int checkZieleLoop; checkZieleLoop < Signal::getZiel().length()); checkZieleLoop++) {
+                if( newListPtr->getSchaltwerkElement->getName() == signalListe()[signalLoop].getName() ) { //ob Element der liste in loop der ziele ist
+                            newListPtr->getSchaltwerkElement()->setIsEingangsElement(true);
+                            eingangssignaleCounter++;
+                            break; // aus innerer for Schleife springen
+                }
+            }
+        newListPtr->getSchaltwerkElement()->setAnzahlEingangssignale(eingangssignaleCounter);
         }
     } // ENDE if startpointer exisiert == FALSE
 }
     
+
+//!!!!!!!!!!!!!!!!!!!! startpointer definieren !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 /*
  signale durchlaufen
