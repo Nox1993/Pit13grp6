@@ -57,14 +57,13 @@ for( int signalLoop = 0; signalLoop < Signal::signalListe().length(); signalLoop
         
         
         for(int zielLoop; zielLoop < Signal::getZiel().length(); zielLoop++) { // Ziele den dazugehˆrigen Signalen zuweisen
-            //!!!!!!!!!!!!!!
+//!!!!!!!!!!!!!!
             SchaltwerkElement::nachfolgerHinzufuegen(Signal::getZiel()[zielLoop], zielLoop);
-            //!!!!!!!!!!!
-        }
-        // anzahlNachfolger wird in nachfolgerHinzufuegen direkt mit hoch gez‰hlt
+//!!!!!!!!!!!
+        } // anzahlNachfolger wird in nachfolgerHinzufuegen direkt mit hoch gezaehlt
         
         
-        // VON JAN   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     newListPtr->getSchaltwerkElement()->setIsAusgangsElement(xxxxxxx);
+// VON JAN   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     newListPtr->getSchaltwerkElement()->setIsAusgangsElement(xxxxxxx);
         short eingangssignaleCounter = 0;
         for( list<ListenElement*>::iterator traitsLoop = verketteteListe.begin(); traitsLoop == verketteteListe.end(); traitsLoop++ ) {
             for( int checkZieleLoop; checkZieleLoop < Signal::getZiel().length()); checkZieleLoop++) {
@@ -80,7 +79,15 @@ for( int signalLoop = 0; signalLoop < Signal::signalListe().length(); signalLoop
 }
 }
 
-//!!!!!!!!!!!!!!!!!!!! startpointer definieren !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//Gattertyp den SchaltwerkElement übergeben...also dem Konstruktor(GatterTyp* gTyp)
+// nachfolgerHinzufuegen(Signal::getZiel()[zielLoop], zielLoop);
+// set isAusgangselement
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 
 
 /*
