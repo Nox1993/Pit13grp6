@@ -10,7 +10,7 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 
-class SchaltwerkElement : public GraphenErzeuger{
+class SchaltwerkElement : public GraphenErzeuger {
     
 private:
     string name;
@@ -36,8 +36,8 @@ public:
     void setname(string n);
     void setAnzahlNachfolger(int Anzahl);
     void setAnzahlEingangssignale(short anzahl);
-    void setEingangsElement(bool isEingangsEl);
-    void setisAusgangsElement(bool isAusangsEl);
+    void setIsEingangsElement(bool isEingangsEl);
+    void setIsAusgangsElement(bool isAusangsEl);
     void setLaufzeitEinzelgatter(double lfz);
     
 };
