@@ -11,7 +11,6 @@
 ListenElement::ListenElement(){
     schaltwerkElement = NULL;
     next = NULL;
-    //ALLE ZEIGER_ATTRIBUTE MIT NULL INITIALISIEREN
 }
 ListenElement::~ListenElement(){
 }
