@@ -1,11 +1,3 @@
-//
-//  ListenElement.h
-//  Praktikum Informationstechnik
-//
-//  Created by Konstantin Sieler on 19.11.13.
-//  Copyright (c) 2013 Konstantin Sieler. All rights reserved.
-//
-
 #ifndef __Praktikum_Informationstechnik__ListenElement__
 #define __Praktikum_Informationstechnik__ListenElement__
 
@@ -17,17 +9,16 @@ using namespace std;
 
 class ListenElement : public SchaltwerkElement{
     private:
-    ListenElement();
-    ~ListenElement();
-    
     SchaltwerkElement* schaltwerkElement;
     ListenElement* next;
 
     public:
+    ListenElement();
+    ~ListenElement();
     SchaltwerkElement* getSchaltwerkElement();
     ListenElement* getNextElement();
-    void setSchaltwerkElement(SchaltwerkElement::SchaltwerkElement* schaltwerkEl);
     void setNextElement(ListenElement* nextEl);
-};
+    void setSchaltwerkElement(SchaltwerkElement::SchaltwerkElement* schaltwerkEl);
 
+};
 #endif
