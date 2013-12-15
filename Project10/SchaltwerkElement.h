@@ -1,7 +1,7 @@
 #ifndef SCHALTWERKELEMENT_H
 #define SCHALTWERKELEMENT_H
 
-
+#include "Bibliothek.h"
 #include "ListenElement.h"
 #include "Gattertyp.h"
 #include "GraphenErzeuger.h"
@@ -10,21 +10,23 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 
-class SchaltwerkElement : public GraphenErzeuger {
+class SchaltwerkElement {
     
 private:
     string name;
-    SchaltwerkElement(GatterTyp* gTyp);
-    ~SchaltwerkElement();
-    Gattertyp* typ;
+    GatterTyp* typ;
     double laufzeitEinzelgatter;
     SchaltwerkElement* nachfolgerElemente[5];
     int anzahlNachfolger;
     bool isEingangsElement;
     bool isAusgangsElement;
-    short anzahlEing angssignale;
+    short anzahlEingangssignale;
     
 public:
+    SchaltwerkElement(GatterTyp* gTyp);
+    ~SchaltwerkElement();
+    void erzeuger(SignalListeErzeuger& signalListeErzeuger, Bibliothek& bibliothek);
+    void setGatterTyp(GatterTyp* gTyp);
     string getName();
     void getTyp();
     double getLaufzeitEinzelgatter();
