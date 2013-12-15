@@ -31,7 +31,7 @@ class GraphenErzeuger {
     short anzahlSignale;
     
     public:
-
+    void erzeuger();
 };
 
 
