@@ -82,12 +82,21 @@
     <ClInclude Include="GatterTyp.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="GraphErzeuger.h" />
+    <ClInclude Include="Graphenerzeuger.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="itiv_win_drv.h" />
-    <ClInclude Include="LaufzeitAnalysator.h" />
+    <ClInclude Include="LaufzeitAnalysator.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ListenElement.h" />
     <ClInclude Include="Menue.h" />
+    <ClInclude Include="SchaltwerkElement.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Signal.h" />
     <ClInclude Include="SignalListeErzeuger.h" />
+    <ClInclude Include="signalTypen.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bibliothek.cpp" />
@@ -96,10 +105,16 @@
     <ClCompile Include="GatterTyp.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GraphErzeuger.cpp" />
-    <ClCompile Include="LaufzeitAnalysator.cpp" />
+    <ClCompile Include="GraphenErzeuger.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="LaufzeitAnalysator.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ListenElement.cpp" />
     <ClCompile Include="mainPraktikum.cpp" />
     <ClCompile Include="Menue.cpp" />
+    <ClCompile Include="SchaltwerkElement.cpp" />
     <ClCompile Include="Signal.cpp" />
     <ClCompile Include="SignalListeErzeuger.cpp" />
   </ItemGroup>

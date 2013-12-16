@@ -1,6 +1,6 @@
 #pragma once
 #include "Bibliothek.h"
-#include "GraphErzeuger.h"
+#include "GraphenErzeuger.h"
 #include "Signal.h"
 #include "SignalListeErzeuger.h"
 #include "Faktoren.h"
@@ -13,7 +13,7 @@ protected:
 	Faktoren meineFaktoren;
 	Bibliothek meineBibliothek;
 	SignalListeErzeuger meinSignalListeErzeuger;
-	GraphErzeuger meinGraphErzeuger;
+	GraphenErzeuger meinGraphErzeuger;
 	LaufzeitAnalysator meinLaufzeitAnalysator;
 
 public:

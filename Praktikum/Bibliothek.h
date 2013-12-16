@@ -21,7 +21,7 @@ public:
 	void dateiAusgabe(vector<string> out);
 	void read(string path);
 	vector<string> getRaw();
-	void Bibliothek::bauteileAuslesen (vector<string> bauteile); //Testzweck
+	void Bibliothek::bauteileAuslesen (vector<string> bauteile); //Testzweck	
 
 private:
 	vector<string> bibRaw;

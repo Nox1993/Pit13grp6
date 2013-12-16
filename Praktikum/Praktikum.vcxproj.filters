@@ -27,9 +27,6 @@
     <ClInclude Include="SignalListeErzeuger.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="GraphErzeuger.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Signal.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -43,6 +40,18 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="GatterTyp.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphenerzeuger.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ListenElement.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SchaltwerkElement.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="signalTypen.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,9 +68,6 @@
     <ClCompile Include="SignalListeErzeuger.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="GraphErzeuger.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Signal.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -75,6 +81,15 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="GatterTyp.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphenErzeuger.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ListenElement.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SchaltwerkElement.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
