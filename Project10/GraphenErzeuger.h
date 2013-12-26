@@ -1,16 +1,9 @@
-//
-//  GraphenErzeuger.h
-//  Praktikum Informationstechnik
-//
-//  Created by Konstantin Sieler on 26.11.13.
-//  Copyright (c) 2013 Konstantin Sieler. All rights reserved.
-//
-
 #ifndef __Praktikum_Informationstechnik__GraphenErzeuger__
 #define __Praktikum_Informationstechnik__GraphenErzeuger__
 
 #include "SchaltwerkElement.h"
 #include "Bibliothek.h"
+#include "ListenElement.h"
 #include "Signal.h"
 
 using namespace std;
@@ -20,8 +13,8 @@ using namespace std;
 #include <fstream>
 
 class GraphenErzeuger {
-
-    private:
+    
+private:
     GraphenErzeuger();
     ~GraphenErzeuger();
     Bibliothek::Bibliothek* bibliothek;
@@ -30,7 +23,7 @@ class GraphenErzeuger {
     Signal::Signal* signale;
     short anzahlSignale;
     
-    public:
+public:
     void erzeuger();
 };
 
