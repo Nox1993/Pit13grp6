@@ -7,7 +7,6 @@ using namespace std;
 Signal::Signal(){
         signalTyp = unbekannt;
         quelle = "NULL";
-        quellenTyp = "Null";
         for(int a = 0; a < 5; a++){        
                 ziele[a] = "NULL";
         }
@@ -47,7 +46,8 @@ string Signal::getZiel(int pos){
                 return ziele[pos];
         }
         else {
-                cout << "Err. @ func. singnal::zielHinzufügen: Pos. out of Array boundaries.";
+                cout << "Err. @ func. singnal::zielHinzufuegen: Pos. out of Array boundaries.";
+				return "Error";
         }
 }
 
@@ -79,12 +79,12 @@ void Signal::setSignalTyp(signalTypen sigTyp){
         signalTyp = sigTyp; 
 }
 
-void Signal::zielHinzufügen(string gatterName,int pos){
+void Signal::zielHinzufuegen(string gatterName,int pos){
         if(pos >= 0 && pos < 5){
                 ziele[pos] = gatterName;
         }
         else {
-                cout << "Err. @ func. singnal::zielHinzufügen: Pos. out of Array boundaries.";
+                cout << "Err. @ func. singnal::zielHinzufuegen: Pos. out of Array boundaries.";
         }        
 }
 //------------------------------------------------------------------------------------

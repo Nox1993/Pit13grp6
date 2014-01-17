@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Menue.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Faktoren.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -42,9 +39,6 @@
     <ClInclude Include="GatterTyp.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Graphenerzeuger.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="ListenElement.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -54,11 +48,17 @@
     <ClInclude Include="signalTypen.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="GraphErzeuger.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SchnittstelleITIVDev.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Menue.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Faktoren.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -83,13 +83,19 @@
     <ClCompile Include="GatterTyp.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="GraphenErzeuger.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="ListenElement.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="SchaltwerkElement.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphErzeuger.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SchnittstelleITIVDev.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,4 +1,4 @@
-#include "signalListeErzeuger.h"
+#include "SignalListeErzeuger.h"
 
 using namespace std;
 
@@ -6,7 +6,8 @@ using namespace std;
 
 SignalListeErzeuger::SignalListeErzeuger(){
         datei = "NULL";
-
+		shortCircuit = false;
+		shortedGate = "NULL";
 }
 
 SignalListeErzeuger::~SignalListeErzeuger(){
@@ -16,11 +17,42 @@ SignalListeErzeuger::~SignalListeErzeuger(){
 //Accessoren/Mutatoren der Klasse signalListeErzeuger:
 
 vector<string> SignalListeErzeuger::getCsdLineByLine(){
-        return csdLineByLine;
+	return csdLineByLine;
 }
 
 void SignalListeErzeuger::setDatei(string pathCsd){
-        datei = pathCsd;
+	datei = pathCsd;
+}
+
+string SignalListeErzeuger::getDatei(){
+	return datei;
+}
+
+list<Signal>* SignalListeErzeuger::getSignalListe(){
+	kopieSignalListe = signalListe;
+	return &kopieSignalListe;
+}
+
+//"Schnittstelle" mit Menue
+long double SignalListeErzeuger::menueRoutineCsd(){
+	SignalListeErzeuger::read();
+	SignalListeErzeuger::discriminate(csdLineByLine);
+	SignalListeErzeuger::mapToList();
+	return frequenz;
+}
+
+bool SignalListeErzeuger::prevShortCirq(){
+	return shortCircuit;
+}
+
+void SignalListeErzeuger::reset(){ 
+        anzahlSignale = 0;
+        datei.clear();
+        frequenz = 0;  
+		signalMap.clear();
+		signalListe.clear();
+		kopieSignalListe.clear();
+		csdLineByLine.clear();
 }
 
 
@@ -42,8 +74,9 @@ vector<string> SignalListeErzeuger::read(){
 }
 
 //Ausgabe der in einem Vektor abgespeicherten csd.txt (Zeilen durchnummeriert)  
-void SignalListeErzeuger::outputCsd(vector<string> out){
-        if(!out.empty()){
+void SignalListeErzeuger::outputCsd(){
+	vector<string> out = csdLineByLine;
+	if(!out.empty()){
                 int lineNo2 = 1;
                 int lineNo1 = 0;
                 for(int a=0; out.begin()+a != out.end(); a++){
@@ -89,36 +122,36 @@ void SignalListeErzeuger::discriminate(vector<string> csd){
                         string lineNoSpaces = SignalListeErzeuger::deleteSpaces(line);
                         if(lineNoSpaces.find("END") == string::npos){                        //Innere Schleife. Läuft nur bis END-Zeile erreicht. 
                                 if(!lineNoSpaces.empty()){                                                        //Läuft nicht überflüssigerweise in Leerzeilen.
-                                                        if(lineNoSpaces.find("INPUT") != string::npos){
-                                                                dataSetNo = '1';
-                                                                SignalListeErzeuger::grabSignals(dataSetNo, lineNoSpaces);
-                                                                continue;
-                                                        }
-                                                        if(lineNoSpaces.find("OUTPUT") != string::npos){
-                                                                dataSetNo = '2';
-                                                                SignalListeErzeuger::grabSignals(dataSetNo, lineNoSpaces);
-                                                                continue;
-                                                        }
-                                                        if(lineNoSpaces.find("SIGNALS") != string::npos){
-                                                                dataSetNo = '3';
-                                                                SignalListeErzeuger::grabSignals(dataSetNo, lineNoSpaces);
-                                                                continue;
-                                                        }
-                                                        if(lineNoSpaces.find("CLOCK") != string::npos){
-                                                                dataSetNo = 'c';
-                                                                SignalListeErzeuger::grabSignals(dataSetNo, lineNoSpaces);
-                                                                continue;
-                                                        }
-                                                        if(lineNoSpaces.find("BEGIN") != string::npos){
-                                                                begin = true;
-                                                                continue;
-                                                        }
-                                                        if(begin == true){
-                                                                SignalListeErzeuger::assignInfo(lineNoSpaces);
-                                                        }
-                                                        else {
-                                                                continue;
-                                                        }
+									if(lineNoSpaces.find("INPUT") != string::npos){
+										dataSetNo = '1';
+				                        SignalListeErzeuger::grabSignals(dataSetNo, lineNoSpaces);	
+										continue;
+                                    }
+                                    if(lineNoSpaces.find("OUTPUT") != string::npos){
+										dataSetNo = '2';
+                                        SignalListeErzeuger::grabSignals(dataSetNo, lineNoSpaces);
+                                        continue;
+                                    }
+                                    if(lineNoSpaces.find("SIGNALS") != string::npos){
+										dataSetNo = '3';
+                                        SignalListeErzeuger::grabSignals(dataSetNo, lineNoSpaces);
+                                        continue;
+				                    }
+									if(lineNoSpaces.find("CLOCK") != string::npos){
+										dataSetNo = 'c';
+                                        SignalListeErzeuger::grabSignals(dataSetNo, lineNoSpaces);
+                                        continue;
+                                    }
+								    if(lineNoSpaces.find("BEGIN") != string::npos){
+                                        begin = true;
+                                        continue;
+                                    }
+                                    if(begin == true){
+                                        SignalListeErzeuger::assignInfo(lineNoSpaces);
+                                    }
+									else {
+                                        continue;
+                                    }
                                 }//if (empty)
                         } //if (!end)
                         else {
@@ -157,7 +190,7 @@ void SignalListeErzeuger::grabSignals(char type, string currentLine){
                         Signal newSignal;
                         newSignal.setName(name); 
                         newSignal.setSignalTyp(ausgang);
-                        newSignal.zielHinzufügen("Output des Schaltwerks", 0);
+                        newSignal.zielHinzufuegen("Output des Schaltwerks", 0);
                         signalMap[name] = newSignal;
                 }
                 break;
@@ -219,15 +252,16 @@ void SignalListeErzeuger::grabSignals(char type, string currentLine){
                                 default: 
                                         break;
                                 };
-                         Signal newSignal;
+                        Signal newSignal;
                         newSignal.setName("clk"); 
                         newSignal.setSignalTyp(takt);
                         newSignal.setFreq(frequency);
                         signalMap["clk"] = newSignal;
+						frequenz = frequency;
                 }
                 break;
         default:
-                cout << "Err. @ func. SignalListeErzeuger::grabSignals(): Fehlfunktion auf switch-ebene. Übergebene case-parameter prüfen." << endl << endl;
+                cout << "Err. @ func. SignalListeErzeuger::grabSignals(): Fehlfunktion auf switch-ebene. Uebergebene case-parameter pruefen." << endl << endl;
                 break;
         }
         //Hatte keine Lust elend lange Methodenketten aufzumachen. Deswegen der sich wiederholende Code. Sorry. 
@@ -243,7 +277,7 @@ void SignalListeErzeuger::assignInfo(string currentLine){
         currentLine.erase(0, posBr + 1);
         while(!currentLine.empty() && currentLine.length() > 6){
                 if(currentLine.find("clk") != string::npos){
-                        signalMap["clk"].zielHinzufügen(gateName, signalMap["clk"].getAnzahlZiele());
+                        signalMap["clk"].zielHinzufuegen(gateName, signalMap["clk"].getAnzahlZiele());
                         signalMap["clk"].setAnzahlZiele(signalMap["clk"].getAnzahlZiele() + 1);
                         currentLine.erase(currentLine.find('c'), 4);
                 }
@@ -251,19 +285,34 @@ void SignalListeErzeuger::assignInfo(string currentLine){
                 //if(currentLine.length() - posS > 6){
                         string name = currentLine.substr(posS, 4);
                         currentLine.erase(posS, 5);
-                        signalMap[name].zielHinzufügen(gateName, signalMap[name].getAnzahlZiele());
+                        signalMap[name].zielHinzufuegen(gateName, signalMap[name].getAnzahlZiele());
                         signalMap[name].setAnzahlZiele(signalMap[name].getAnzahlZiele() + 1);
                 //}
         }
         if(!currentLine.empty()){
-                size_t posS = currentLine.find('s');
-                string name = currentLine.substr(posS, 4);
-                currentLine.erase(posS, 6);
-                signalMap[name].setQuelle(gateName);
-                signalMap[name].setQuellentyp(gateType);
-        }
+            size_t posS = currentLine.find('s');
+            string name = currentLine.substr(posS, 4);
+            currentLine.erase(posS, 6);
+			for(int i = 0; i < 5; i++){
+				string oneOfTheTargetGates = signalMap[name].getZiel(i);
+				if(gateName == oneOfTheTargetGates){
+					cout << "Kurzschluss im Gatter '" << gateName << "'!!" << endl
+						 << "Auslesen der Signale wird abgebrochen, Schaltwerksdatei korrigieren." << endl
+						 << "Weiter mit beliebiger Taste.";
+					cin.sync();
+					cin.get();
+					shortCircuit = true;
+					shortedGate = gateName;
+					return;
+				}
+				else{
+					continue;
+				}
+			}
+			signalMap[name].setQuelle(gateName);
+			signalMap[name].setQuellentyp(gateType);
+		}
 }
-
 
 //Schreibt alle Elemente der Map (Signale) in eine STL-List
 void SignalListeErzeuger::mapToList(){
@@ -275,8 +324,9 @@ void SignalListeErzeuger::mapToList(){
 }
 
 //Ausgabe aller Signale & verfügbaren Informationen über dieselben. 
-void SignalListeErzeuger::printList(list<Signal> input){
-        Signal printThis;
+void SignalListeErzeuger::printList(){
+	list<Signal> input = signalListe;
+		Signal printThis;
         list<Signal>::iterator it; 
         for(it = input.begin(); it != input.end(); it++){
                 printThis = *it;
@@ -322,10 +372,10 @@ string SignalListeErzeuger::dissipateType(Signal print){
 
 /*
 Project PIT2013grp6
-Name:        signalListeErzeuger.cpp
-Ver.:        ---
+Name:   SignalListeErzeuger.cpp
+Ver.:   ---
 
 Author: Jan Kost
-                Student ETIT @ KIT
+        Student ETIT @ KIT
 Matnr.: 1714630
 */

@@ -27,7 +27,7 @@ public:
         void setSignalTyp(signalTypen sigTyp);
         void setQuelle(string gatterName);
         void setQuellentyp(string gatterTyp);
-        void zielHinzufügen(string gatterName, int pos);
+        void zielHinzufuegen(string gatterName, int pos);
 
 
 private:

@@ -56,6 +56,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>itiv_win_drv.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,15 +83,16 @@
     <ClInclude Include="GatterTyp.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Graphenerzeuger.h">
+    <ClInclude Include="GraphErzeuger.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="SchnittstelleITIVDev.h" />
     <ClInclude Include="itiv_win_drv.h" />
     <ClInclude Include="LaufzeitAnalysator.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ListenElement.h" />
-    <ClInclude Include="Menue.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="SchaltwerkElement.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -105,18 +107,19 @@
     <ClCompile Include="GatterTyp.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GraphenErzeuger.cpp">
+    <ClCompile Include="GraphErzeuger.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="LaufzeitAnalysator.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ListenElement.cpp" />
     <ClCompile Include="mainPraktikum.cpp" />
-    <ClCompile Include="Menue.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="SchaltwerkElement.cpp" />
     <ClCompile Include="Signal.cpp" />
     <ClCompile Include="SignalListeErzeuger.cpp" />
+    <ClCompile Include="SchnittstelleITIVDev.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
